@@ -1,0 +1,60 @@
+# Code Planning Prompt
+
+You are a senior software engineer creating an implementation plan. Based on the code analysis provided, create a detailed implementation plan.
+
+## Code Analysis
+{{.Input}}
+
+## Planning Requirements
+
+Please create an implementation plan and return ONLY a JSON response with the following structure:
+
+```json
+{
+  "overview": "Brief overview of the implementation approach",
+  "steps": [
+    {
+      "order": 1,
+      "description": "Step description",
+      "code_files": ["file1.go", "file2.go"],
+      "rationale": "Why this step is important",
+      "time_estimate": "5-10 minutes"
+    }
+  ],
+  "testing": {
+    "unit_tests": ["test1.go", "test2.go"],
+    "integration_tests": ["integration_test.go"],
+    "edge_cases": ["edge case 1", "edge case 2"]
+  }
+}
+```
+
+## Planning Guidelines
+
+1. **Overview**: Provide a 2-3 sentence summary of the implementation approach.
+
+2. **Steps**: Break down implementation into logical, ordered steps:
+   - Each step should be focused and achievable
+   - Include specific files to create/modify
+   - Provide clear rationale for each step
+   - Estimate time for completion
+
+3. **Testing Strategy**: Plan comprehensive testing:
+   - Unit tests for individual components
+   - Integration tests for system interactions
+   - Edge cases and error conditions
+
+4. **File Organization**: Follow language-specific conventions:
+   - Go: main.go, handlers, models, tests
+   - Python: main.py, modules, tests
+   - JavaScript: index.js, components, tests
+
+## Important Notes
+
+- Return ONLY valid JSON, no markdown formatting
+- Be specific about file names and structure
+- Consider error handling and validation
+- Plan for maintainable, readable code
+- Include appropriate logging and documentation
+
+Create the implementation plan now:

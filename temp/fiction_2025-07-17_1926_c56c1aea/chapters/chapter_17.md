@@ -1,0 +1,67 @@
+# Chapter 17
+
+Absolutely! Here’s an expanded, richer version of CHAPTER 17, meeting your 1000-word target by deepening sensory details, characters’ reactions, and vivid world-building—while keeping your story beats, pacing, and voice intact.
+
+---
+
+# Chapter 17 (Expanded, Immersive)
+
+The portal snapped shut behind them with a crack and fizz, arcs of multiversal static leaping between the bulkheads. The air tasted like hot ozone and dying pixels. Rick slapped flecks of afterglow from his lab coat, fingers twitching with leftover energy. He scowled, scanning his team. “Alright, everyone in one piece?” His voice echoed around the chrome-and-polychrome chamber, made stranger by the low hum of overlapping timelines. “Wade, check your spleen—make sure it didn’t respawn three timelines back.”
+
+Deadpool patted his torso—one, two, for show—then wiggled his hips and shot Rick finger guns. “Still squishy, Doc! If an extra limb turns up, I’m patching it in as downloadable content. Might increase my DPS. Could use a spare for dramatic gesturing anyway.” His katanas flickered as he spoke, edges blipping between ‘steel’ and ‘plot device’—tiny, meta sparks dancing along the blades. The smell was weirdly nostalgic, like burnt toast and page glue.
+
+Morty eyed those swords, edged toward Rick. “So, uh… what now? Please say the villain’s lair isn’t, like, a haunted circus. Or inside a giant toilet. Or something even more humiliating.” His voice quavered—Morty’s feet might be on solid ground, but his nerves were pure quantum mush.
+
+Rick’s scowl softened—barely visible, but there. With a sharp snap, he unfurled a battered holo-map: neon overlays, shifting paper edges, static hissing through its digital lattices. Code, cartoon, and crumpled Post-It notes flickered as layers. “Worse,” he said, lip curling. “The Irony Fortress at the heart of the Multiversal Script Engine. The villain’s hijacked narrative code itself.” He jabbed a light at a point labeled ‘Here Be Plot Holes.’ “Picture a writers’ room with more lasers, fewer sobriety checkpoints.”
+
+Deadpool slung an arm over Morty’s tense shoulders, voice dropping to a mock-whisper. “Relax, sidekick! If any sentient plot twists turn up, just stick with me. I’m immune to genre fatigue. I once out-argued a Deus Ex Machina for overtime pay. Beat a two-page monologue with an interpretive dance.” His eyes twinkled behind the mask, his breath smelling faintly of popcorn and fourth wall.
+
+Morty wanted to laugh—almost—but the walls around them pulsed, and he shivered. “That… sounds real. Which kind of terrifies me even more.”
+
+But Deadpool stopped mid-step, cocking his head as if a tune only he could hear. “Uh, guys? Why is the wall blinking at us?”
+
+They all turned. The ‘fourth wall’ at the chamber’s edge was not only translucent, but viscous, rippling as if stirred by unseen wind. Faces flickered in and out of its negative-space surface—smug, curious, quietly judgmental. It watched, not passively, but as though it could blink first.
+
+Rick let out a dry cackle, half awe, half pure annoyance. “Now we’re close. Endgame territory. The wall starts breaking back, that’s your cue you’re right at the story’s throat.” He reached into his coat, producing a gadget writhing with wires, static, and the swirling ghosts of last panel’s dialogue bubbles. “Morty, breach protocol. If the universe folds in half, just aim away from your shoes.” Rick pressed the device into Morty’s trembling hand—plastic warm, vibrating with potential.
+
+Morty’s hands shook, sweat slicking his palms. A thousand Mortys from a thousand timelines watched, argued, cheered, doubted. But he cocked a shaky smile, pressed the device to the flickering surface. Colors collapsed, comic panels fractured and multiplied—his own voice echoing back in fragments. Laughter, warnings, half-remembered bravado. A corridor spilled open ahead, snaking with impossible geometry, an MC Escher painting as plotted by caffeine-hyped fanfiction authors.
+
+Deadpool swayed as he looked inside, like his consciousness was buffering. “My spleen’s reciting French poetry and my brain’s spinning. Reality Plus, and I still get lag. Where’s the patch notes for this?”
+
+Rick tried handing Deadpool a flask (which had turned into a banana last universe), frowned, produced a different flask, and took a swallow. The air, heavy with the scent of melting crayons and irony, gave him pause. “It’s narrative vertigo, Morty,” he said, voice unusually sympathetic. “If you walk out of here without a new phobia, you’re not trying hard enough.” He passed the flask to Deadpool, who saluted, then took an extravagant sniff.
+
+“Nothing like interdimensional spirits for courage,” Deadpool confided, winking—or trying to—under his mask. “Just enough for an ill-advised plan before Meta-Lord remixes us into garden gnomes. Or worse, a reboot.”
+
+Rick checked a chunky device on his wrist—literally labeled ‘Plot Device’—its hands spinning like a roulette wheel. “If Meta-Lord cracks this zone, we’ve got ten minutes. Give or take a retcon. So: strategize, or enjoy your cameo in the next filler montage.”
+
+Morty drew himself up, hugging the gadget. For a second, he felt something stirring—maybe not courage, but momentum. “So, is there an actual plan? Or are we just improvising and praying for a good editor?”
+
+Rick grinned, glancing sideways at Deadpool. “Improv’s the only move the author can’t predict. Plus, it’s fun to mess up the script.”
+
+Something between hope and static shimmered in the air, threading between all three.
+
+They advanced into the corridor. The floor was both staircase and conveyor belt, shoving them forward whether they liked it or not. Doors zipped in and out of existence—giant keyholes filled with teeth, curved metal blossoming into trapdoors, patches of cartoon brick wall as backdrops. Every step, the walls flickered between TV static and slick inky comic panels. Sometimes, Morty glimpsed flickering echoes—other selves, villains gone, a shadow with Meta-Lord’s grin mocking in retreat.
+
+“New rule,” Rick muttered, rummaging in his coat. Out came in quick succession: a banana, two grenades, actual flask. He kept the grenades, handed the banana to Morty. “We only travel like this again if the plot’s on fire.”
+
+Morty peered into a floating comic panel and saw—himself, but jacked, wrestling an angry taco. He recoiled, dropping the banana. “Why does muscle-Morty have my sweater? And what’s with the taco?”
+
+“Don’t look at alternate-you!” Deadpool called, fencing with a flickering panel. “Those timelines feed on insecurity. Also, tacos. Especially in multiverse after-lunch special arcs.”
+
+Curious, Deadpool poked at a warping panel. His hand vanished with a boing and swirl of cartoon birds, emerging with just four exaggerated, cel-shaded fingers. “The meta here’s thicker than a ‘season finale’ clip-show. Anyone else smell burnt foreshadowing?”
+
+Rick’s head snapped up—awareness prickled the air, made the shadows flicker. “That’s not just meta. That’s villain territory. Stay frosty.”
+
+At the corridor’s far end, the air twisted itself into knots. A figure emerged—draped in torn storyboard panels, speech bubbles orbiting his mask like satellites. Words poured from his mouth, taking shape as tangible comic boxes, the lines anchoring reality itself.
+
+Morty’s mouth ran dry. “Meta-Lord. You said he couldn’t find us yet.”
+
+Rick’s jaw clenched, old guilt flickering. “He’s been jumping script lines. Ever since Chapter Five.”
+
+Deadpool spun his katanas—one real, one shimmering with onomatopoeia. “Of course the villain appears inside a word balloon. Talk about committing to a bit. Ready, team?”
+
+Rick’s grin was sharp. “Let’s out-improvise this hack.”
+
+Side by side, the trio advanced, cartoon echoes scattering as Meta-Lord’s laughter filled the corridor—a threat, a callback, and the promise of a showdown wild enough to tear the story open.
+
+---

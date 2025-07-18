@@ -1,0 +1,33 @@
+ai:
+  api_key: ${OPENAI_API_KEY}  # Can be set via environment variable
+  model: claude-3-5-sonnet-20241022
+  base_url: https://api.anthropic.com/v1
+  timeout: 30
+
+paths:
+  # Output directory for generated novels
+  # Default: $XDG_DATA_HOME/orchestrator/output (usually ~/.local/share/orchestrator/output)
+  output_dir: ""  # Leave empty to use XDG default
+  
+  prompts:
+    # Prompt template files
+    # Default: $XDG_DATA_HOME/orchestrator/prompts/*.txt
+    orchestrator: ""  # Leave empty to use XDG default
+    architect: ""     # Leave empty to use XDG default  
+    writer: ""        # Leave empty to use XDG default
+    critic: ""        # Leave empty to use XDG default
+
+limits:
+  max_concurrent_writers: 10
+  max_prompt_size: 100000
+  max_retries: 3
+  total_timeout: 30m
+  phase_timeouts:
+    planning: 10m      # Planning phase timeout
+    architecture: 15m  # Architecture phase timeout
+    writing: 60m       # Writing phase timeout (longer for large novels)
+    assembly: 5m       # Assembly phase timeout
+    critique: 10m      # Critique phase timeout
+  rate_limit:
+    requests_per_minute: 60
+    burst_size: 10

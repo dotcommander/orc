@@ -1,0 +1,19 @@
+Rick grunted, elbow deep in the guts of his motley device. “Morty, hand me the—no, not the femur, the quantum capacitor. The one with the existential dread leaking out.”
+
+Morty fumbled, poking gingerly at the pile of assembled junk. “Are we sure this is going to, you know, work, Grandpa? Last time you said that, we got chased by interdimensional clowns.”
+
+“Those clowns were an upgrade from this guy,” Rick grumbled, jerking his head toward Deadpool, who was rearranging vending machine debris into a makeshift throne.
+
+Deadpool perched on his new seat with regal flair, twirling a bent can tab. “You guys ever feel like we’re all just action figures glued to a plot by some nerd at a keyboard? Just me? Cool, cool.”
+
+Morty rolled his eyes. “Pretty sure I wouldn’t have picked this outfit if I had that kind of control.”
+
+Overhead, fluorescent lights flickered as a pulse of energy rattled the walls—Rick’s device sputtered, a blue shimmer crawling up the prosthetic leg. “Everybody shut up!” Rick snapped. “This is precision work. I’m quantum-splicing meta-resonance signatures with—oh, screw it, Deadpool, just toss me that Snickers bar.”
+
+Deadpool obliged with an exaggerated windup, pegging the candy directly into Rick’s open palm. “You’re welcome, Doc Brown. Now, while you science, should I keep an eye out for enemies, or just for the next punchline?”
+
+The device hummed, whirring with unexpected smoothness. Rick peeled back the wrapper, taking a monstrous bite. “Keep your fourth-wall monologues to a minimum. If Meta-Maven’s sniffing for us, the less narrative leakage, the better.”
+
+Morty’s voice quaked. “Is it supposed to glow like that?”
+
+A phosphorescent bubble expanded from the device, swirling with fragments of comic panels and TV static. Rick grinned, chocolate in his teeth. “Yeah, kid. This is where things get really weird.”

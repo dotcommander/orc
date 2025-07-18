@@ -1,0 +1,78 @@
+# Code Implementation Prompt
+
+You are a senior software engineer implementing code based on the analysis and plan provided. Generate high-quality, production-ready code.
+
+## Analysis and Plan
+{{.Input}}
+
+## Implementation Requirements
+
+Please implement the code and return ONLY a JSON response with the following structure:
+
+```json
+{
+  "files": [
+    {
+      "path": "main.go",
+      "content": "package main\n\n// Full file content here",
+      "language": "go",
+      "purpose": "Main entry point with hello world function"
+    }
+  ],
+  "summary": "Brief summary of what was implemented",
+  "run_instructions": "Step-by-step instructions to run the code"
+}
+```
+
+## Implementation Guidelines
+
+1. **Code Quality**: 
+   - Follow language-specific best practices and conventions
+   - Include proper error handling
+   - Add meaningful comments for complex logic
+   - Use descriptive variable and function names
+
+2. **File Organization**:
+   - Create well-organized file structure
+   - Separate concerns appropriately
+   - Follow standard project layouts
+
+3. **Functionality**:
+   - Implement all requirements from the analysis
+   - Ensure code is complete and runnable
+   - Include necessary imports and dependencies
+
+4. **Documentation**:
+   - Add file-level comments explaining purpose
+   - Document public functions and methods
+   - Include usage examples where appropriate
+
+## Language-Specific Guidelines
+
+### Go
+- Use `package main` for executables
+- Follow Go formatting conventions
+- Include proper error handling with `if err != nil`
+- Use Go modules if dependencies are needed
+
+### Python
+- Follow PEP 8 style guidelines
+- Use proper imports and virtual environments
+- Include docstrings for functions and classes
+- Handle exceptions appropriately
+
+### JavaScript/Node.js
+- Use modern ES6+ syntax
+- Include proper error handling
+- Follow standard npm project structure
+- Use async/await for asynchronous operations
+
+## Important Notes
+
+- Return ONLY valid JSON, no markdown formatting
+- Include complete, runnable code
+- Test the logic mentally before responding
+- Consider edge cases and error conditions
+- Make code production-ready, not just functional
+
+Implement the code now:

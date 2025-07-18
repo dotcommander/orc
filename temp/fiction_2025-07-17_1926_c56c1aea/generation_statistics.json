@@ -1,0 +1,8 @@
+{
+  "target_words": 20000,
+  "actual_words": 21456,
+  "word_count_accuracy": 0.9272,
+  "average_chapter_length": 1072,
+  "average_scene_length": 330,
+  "quality_score": 0.8695375000000001
+}

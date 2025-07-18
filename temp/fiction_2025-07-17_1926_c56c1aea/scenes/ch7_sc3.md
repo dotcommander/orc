@@ -1,0 +1,21 @@
+Deadpool stopped mid-stride, staring slack-jawed as the swirling code of the multiverse flickered around them. Panels of comic art peeled away like errant wallpaper, exposing raw, pulsating grids beneath. “Y’know, I didn’t mind a little fourth-wall shenanigans, but this is starting to feel like a techno rave in a blender,” he quipped, spinning his katanas for comfort.
+
+Rick was hunched over his portal gun, furiously recalibrating the dials. “Someone’s jamming the multiversal frequency with meta-constructs. Reality’s undergoing *editorial revision*, and we’re ground zero.” His face was all determination and eye bags.
+
+Morty gazed around with wide eyes. Giant floating hashtags and scrolling ‘LAUGH TRACK’ banners twisted overhead like storm clouds. “Uh—guys, I think I’m allergic to this much irony.”
+
+A pixelated version of Deadpool zipped by, trailing exaggerated winks and airhorn memes. Deadpool tackled it, arms flailing. “Finally, some competition! Gimme back my *brand*, poser!”
+
+The fake ‘Pool dissolved into a mess of error messages, shrieking “LOL SORRY, CANON VIOLATION” before evaporating.
+
+Morty edged closer to Rick. “So, what’s the plan? I-I’m not ready to get deleted by a snarky subtitle.”
+
+Rick eyed the unraveling horizon, grimacing. “We override the punchline engine. I get us to the nucleus. Deadpool, you’ll need to cut through a few jokes—literally. Morty, just… try not to existentially combust.”
+
+Deadpool straightened, twirling a katana. “Heroic sacrifice vibe, got it. Been there, stabbed that. Lead the way, Doc—before my speech bubbles start quoting Garfield.”
+
+Just then, a hole tore in the pixelated floor, revealing a descending staircase with ‘PLOT PROGRESSION’ flickering in neon.
+
+Rick cocked an eyebrow. “Well, subtlety’s dead. Let’s move.”
+
+They sprinted toward the stairs, the world reformatting behind them as they dove into the next layer of madness.

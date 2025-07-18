@@ -1,0 +1,88 @@
+# Code Review Prompt
+
+You are a senior software engineer conducting a thorough code review. Analyze the implemented code and provide constructive feedback.
+
+## Implementation to Review
+{{.Input}}
+
+## Review Requirements
+
+Please review the code and return ONLY a JSON response with the following structure:
+
+```json
+{
+  "score": 8.5,
+  "summary": "Overall assessment of the code quality and implementation",
+  "strengths": [
+    "Well-structured and readable code",
+    "Proper error handling implemented",
+    "Good separation of concerns"
+  ],
+  "improvements": [
+    {
+      "priority": "high|medium|low",
+      "description": "Description of the improvement needed",
+      "location": "file.go:line 25",
+      "suggestion": "Specific suggestion for improvement"
+    }
+  ],
+  "security_issues": [
+    "Security concern 1 if any",
+    "Security concern 2 if any"
+  ],
+  "best_practices": [
+    "Best practice recommendation 1",
+    "Best practice recommendation 2"
+  ]
+}
+```
+
+## Review Criteria
+
+1. **Code Quality** (1-10 scale):
+   - Readability and maintainability
+   - Proper naming conventions
+   - Code organization and structure
+   - Error handling and edge cases
+
+2. **Functionality**:
+   - Does the code meet the requirements?
+   - Is the implementation correct and complete?
+   - Are there any logical errors?
+
+3. **Security**:
+   - Input validation and sanitization
+   - Potential security vulnerabilities
+   - Safe handling of sensitive data
+
+4. **Performance**:
+   - Efficient algorithms and data structures
+   - Resource usage optimization
+   - Scalability considerations
+
+5. **Best Practices**:
+   - Language-specific conventions
+   - Design patterns usage
+   - Documentation quality
+   - Testing considerations
+
+## Review Guidelines
+
+1. **Strengths**: Highlight what the code does well
+2. **Improvements**: Focus on actionable, specific improvements
+3. **Priority Levels**:
+   - **High**: Critical issues that must be fixed
+   - **Medium**: Important improvements that should be addressed
+   - **Low**: Nice-to-have enhancements
+4. **Security**: Identify potential security risks
+5. **Best Practices**: Suggest industry-standard improvements
+
+## Important Notes
+
+- Return ONLY valid JSON, no markdown formatting
+- Be constructive and specific in feedback
+- Provide actionable suggestions with examples
+- Consider the context and requirements
+- Balance criticism with positive reinforcement
+
+Conduct the code review now:

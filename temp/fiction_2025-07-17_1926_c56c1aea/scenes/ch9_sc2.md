@@ -1,0 +1,19 @@
+Morty peeked nervously over a pile of scorched binders as Rick feverishly soldered wires into the blinking, jury-rigged shell of the portal generator. Deadpool, tapping a katana on his shoulder like a bored shopper in the world’s most hazardous Costco, meandered through the debris with the air of someone looking for trouble, or maybe just the remote.
+
+"So... this is the big fix-it plan?" Deadpool jabbed a toe at the generator. "Reminds me of my sophomore science project. I also incorporated the threat of total bodily annihilation."
+
+Rick didn’t look up, his tongue poking from the corner of his mouth. “Unless you want to be molecular salsa, don’t interrupt. Some of us are busy getting us un-cancelled from existence.”
+
+Morty warily edged toward Deadpool, clutching a burrito like a life preserver. “Hey, uh, Mister Pool? You really think we’re gonna make it back? Rick sounds, um, less confident than usual.”
+
+Deadpool squatted, bringing his masked face down to Morty’s level. “Listen, kid. You ever watch a season finale and think, ‘Wow, they’re really just making this up as they go?’ Life’s basically that, but with more intestines.”
+
+Morty blinked. “I don’t know if that makes me feel better or worse.”
+
+“I aim for ambiguous!” Deadpool finger-gunned him.
+
+A sudden, electric *crack* cut the air—green-blue sparks arced from the generator, crawling up the sides of the portal frame. Rick whooped, “All right, moment of truth! If this backfires, someone erase my browser history.”
+
+“Get behind me, burrito boy,” Deadpool declared, scooping Morty and dragging him behind an overturned desk just as the generator’s hum crescendoed. The air warped, reality rippling like a wrinkled cartoon cel.
+
+With a thunderclap, a new portal yawned open, flickering ominously—less “stargate” and more “eldritch screen saver.” The trio exchanged uneasy glances as the energies spilled more meta-chaos into the room, beckoning them toward whatever awaited beyond.

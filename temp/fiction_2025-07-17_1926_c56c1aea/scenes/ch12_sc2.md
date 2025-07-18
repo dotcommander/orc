@@ -1,0 +1,21 @@
+Morty finally located the quantum capacitor, eyeing its swirling aura of blue static and vague doom. “Uh, here, Rick. Do I need gloves or, like, a full-on Hazmat suit?”
+
+Rick grunted, flicking a coil into place. “Morty, at this stage you need blind faith and terrible judgment. Hand it over.”
+
+Morty gulped and passed the capacitor. Instantly, the air thickened—smelling faintly of burnt popcorn and overused punchlines. Deadpool, perched on a busted arcade cabinet, watched with an exaggerated yawn. “So, how long till this McGuffin starts glowing and ticking ominously? I need to know when to start panicking attractively.”
+
+Rick smirked without looking up. “You panicking is the default, dipstick. But if you’re offering to be bait for the meta-humor siphon, I accept.”
+
+Deadpool leapt off the cabinet, katana twirling. “Ooooh, is that a formal invitation to do something stupid? You shouldn’t have!”
+
+Morty bit his lip, scanning the smoke-filled workshop. Frayed wires sparked above comic books and a jar labeled ‘Spare Neural Pathos’. “Shouldn’t we talk about, y’know, what if this all goes extra sideways? Like, the plan relies on us being cliché enough to draw out whoever’s hacking reality?”
+
+Rick jammed the capacitor in place. The device rattled, casting flickering shadows. “It’s not just being cliché, Morty, it’s weaponizing it. Deadpool—up for a little self-awareness?”
+
+Deadpool struck a pose, finger-guns blazing. “Buddy, my self-awareness needs a seatbelt. Tell me where to stand and how much to monologue.”
+
+The device lurched to life. Lights strobed, walls warped, and a low-frequency chuckle buzzed in their brains—like the multiverse itself mocking them. Rick wiped sweat from his brow, grinning maniacally. “Here we go. Remember: if the villain drops a catchphrase, nobody laugh.”
+
+Deadpool winked. “No promises, Doc. I laugh in the face of doom. Literally. Morty, you got insurance?”
+
+Morty opened his mouth to respond—when the floor shook violently, and the walls began to bleed word balloons.
