@@ -1,78 +1,87 @@
-# The Orchestrator Documentation Structure
+# Orc Documentation
 
-This directory contains comprehensive documentation for the The Orchestrator AI Novel Generation Orchestrator.
+Welcome to Orc's documentation! These guides will help you generate amazing content with AI.
 
-## Navigation Hub
+## 📚 User Guides
 
-**🤖 For AI Assistants**: Start with [`../CLAUDE.md`](../CLAUDE.md) - your primary navigation hub  
-**👨‍💻 For Humans**: Start with [`../README.md`](../README.md) - installation and usage guide
+| Guide | Description |
+|-------|-------------|
+| [Getting Started](../README.md) | Installation and first steps |
+| [Configuration](configuration.md) | Set up Orc for your needs |
+| [How Orc Works](technical.md) | Understand Orc's innovative approach |
+| [Troubleshooting](troubleshooting.md) | Solve common issues |
+| [Performance Tuning](performance.md) | Optimize generation speed |
+| [Quality Verification](verification-system.md) | Ensure high-quality output |
+| [Enhanced Prompts](enhanced-prompts.md) | Advanced prompt features |
 
-## Documentation Hierarchy
+## 🚀 Quick Links
 
-### Core Documentation
-- [`../CLAUDE.md`](../CLAUDE.md) - **AI Assistant Navigation Hub** (START HERE for AI)
-- [`../README.md`](../README.md) - **User Guide** (installation, usage, configuration)
-- [`../concept.md`](../concept.md) - **Architecture Assessment** (migration plan and improvements)
-- [`../concept2.md`](../concept2.md) - **Enhanced Architecture** (operational concerns and hardening)
+### For New Users
+1. **[Install Orc](../README.md#installation)** - Get started in minutes
+2. **[Configure API Key](configuration.md#environment-variables)** - Set up AI access
+3. **[Run First Generation](../README.md#quick-start)** - Create your first content
 
-### Technical Documentation
-- [`technical.md`](technical.md) - **System Architecture** (detailed design patterns and API reference)
-- [`configuration.md`](configuration.md) - **Configuration Guide** (XDG compliance and options)
-- [`contributing.md`](contributing.md) - **Development Guide** (contributing and patterns)
-- [`performance.md`](performance.md) - **Performance Analysis** (optimization and benchmarks)
-- [`complexity-reduction-summary.md`](complexity-reduction-summary.md) - **Complexity Analysis** (code simplification)
+### For Regular Users
+- **[Optimize Performance](performance.md)** - Generate content faster
+- **[Customize Verification](verification-system.md)** - Ensure quality
+- **[Advanced Configuration](configuration.md#advanced-configuration-examples)** - Fine-tune settings
 
-### Core Planning & Architecture  
-- [`../PLAN.md`](../PLAN.md) - **Systematic Architecture Plan** (word budget engineering innovation)
-- [`../SYSTEMATIC_DOCUMENTATION_PLAN.md`](../SYSTEMATIC_DOCUMENTATION_PLAN.md) - **Documentation Strategy** (systematic approach)
+### For Contributors
+- **[Contributing Guide](contributing.md)** - Help improve Orc
+- **[Examples](examples/)** - See Orc in action
 
-### Examples and Tutorials
-- [`examples/`](examples/) - **Code Examples** (usage patterns and integrations)
-- [`../prompts/`](../prompts/) - **AI Prompt Templates** (systematic phase prompts)
+## 📖 Documentation Overview
 
-## Quick Reference
+### What You'll Find Here
 
-### For Different Audiences
+#### Understanding Orc
+- **[How Orc Works](technical.md)** - Learn about Word Budget Engineering and systematic generation
+- **[Enhanced Prompts](enhanced-prompts.md)** - Discover Orc's advanced prompt capabilities
 
-| Audience | Start Here | Key Files |
-|----------|------------|-----------|
-| **AI Assistants** | [`../CLAUDE.md`](../CLAUDE.md) | `../PLAN.md`, `technical.md`, `contributing.md` |
-| **End Users** | [`../README.md`](../README.md) | `configuration.md`, `performance.md` |
-| **Developers** | [`contributing.md`](contributing.md) | `../PLAN.md`, `technical.md`, `examples/` |
-| **Researchers** | [`../PLAN.md`](../PLAN.md) | `performance.md`, `complexity-reduction-summary.md` |
-| **Contributors** | [`contributing.md`](contributing.md) | `../concept.md`, `technical.md` |
+#### Using Orc Effectively  
+- **[Configuration Guide](configuration.md)** - Customize Orc for your workflow
+- **[Performance Tuning](performance.md)** - Speed up generation without losing quality
+- **[Quality Verification](verification-system.md)** - Ensure consistent, high-quality output
 
-### Common Tasks
+#### When Things Go Wrong
+- **[Troubleshooting Guide](troubleshooting.md)** - Fix common problems quickly
+- **[Examples](examples/)** - Learn from working examples
 
-| Task | Documentation |
-|------|---------------|
-| Install and configure | [`../README.md`](../README.md) → [`configuration.md`](configuration.md) |
-| Understand architecture | [`../CLAUDE.md`](../CLAUDE.md) → [`architecture.md`](architecture.md) |
-| Add new phase | [`development.md`](development.md) → [`phases.md`](phases.md) |
-| Modify AI interactions | [`api.md`](api.md) → [`prompts/`](prompts/) |
-| Debug issues | [`troubleshooting.md`](troubleshooting.md) → [`monitoring.md`](monitoring.md) |
-| Deploy to production | [`deployment.md`](deployment.md) → [`security.md`](security.md) |
+## 🎯 Common Tasks
 
-## Documentation Standards
+### "I want to..."
 
-### AI Assistant Context
-- All documentation includes **AI-friendly context** at the top
-- **Quick navigation** to relevant files for specific tasks
-- **Code examples** with complete, runnable snippets
-- **Cross-references** between related concepts
+#### Generate a Novel
+```bash
+orc create fiction "Write a sci-fi thriller about time travel" --fluid
+```
+See: [Configuration](configuration.md#basic-setup-for-novel-writing) | [Examples](examples/)
 
-### Human-Readable Format
-- **Clear headings** and navigation structure
-- **Prerequisites** and **assumptions** clearly stated
-- **Step-by-step instructions** for complex procedures
-- **Troubleshooting sections** with common solutions
+#### Generate Code
+```bash
+orc create code "Build a REST API in Python with FastAPI" --fluid
+```
+See: [Configuration](configuration.md#setup-for-code-generation) | [Verification](verification-system.md#code-verification)
 
-### Maintenance
-- **Last updated** dates on all files
-- **Version compatibility** information
-- **Breaking changes** highlighted in updates
-- **Cross-reference validation** during updates
+#### Resume a Session
+```bash
+orc resume SESSION_ID
+```
+See: [Troubleshooting](troubleshooting.md#session-and-resume-issues)
+
+#### Optimize Speed
+See: [Performance Guide](performance.md) for configuration tips
+
+#### Fix an Error
+See: [Troubleshooting Guide](troubleshooting.md) for solutions
+
+## 📞 Getting Help
+
+1. **Quick fixes** → [Troubleshooting Guide](troubleshooting.md)
+2. **Setup help** → [Configuration Guide](configuration.md) 
+3. **Understanding features** → [How Orc Works](technical.md)
+4. **Contributing** → [Contributing Guide](contributing.md)
 
 ---
 
-**Note**: This documentation structure follows the project's XDG compliance and clean architecture principles. All paths use absolute references for clarity and maintainability.
+*Happy content generation with Orc!* 🚀
