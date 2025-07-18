@@ -6,20 +6,18 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/dotcommander/orc/internal/core"
-	"github.com/dotcommander/orc/internal/domain"
-	"github.com/dotcommander/orc/internal/phase/fiction"
+	"github.com/dotcommander/orc/pkg/orc"
 )
 
 // Plugin implements the domain plugin interface for fiction generation
 type Plugin struct {
-	agentFactory *core.AgentFactory
-	storage      core.Storage
-	logger       *slog.Logger
+	agentFactory orc.AgentFactory
+	storage      orc.Storage
+	logger       orc.Logger
 }
 
 // NewPlugin creates a new fiction plugin instance
-func NewPlugin(agentFactory *core.AgentFactory, storage core.Storage, logger *slog.Logger) *Plugin {
+func NewPlugin(agentFactory orc.AgentFactory, storage orc.Storage, logger orc.Logger) *Plugin {
 	return &Plugin{
 		agentFactory: agentFactory,
 		storage:      storage,
@@ -28,8 +26,8 @@ func NewPlugin(agentFactory *core.AgentFactory, storage core.Storage, logger *sl
 }
 
 // GetInfo returns plugin metadata
-func (p *Plugin) GetInfo() domain.PluginInfo {
-	return domain.PluginInfo{
+func (p *Plugin) GetInfo() orc.PluginInfo {
+	return orc.PluginInfo{
 		Name:        "fiction",
 		Version:     "1.0.0",
 		Description: "AI-powered fiction and novel generation",
@@ -40,19 +38,15 @@ func (p *Plugin) GetInfo() domain.PluginInfo {
 }
 
 // CreatePhases returns the phases for fiction generation
-func (p *Plugin) CreatePhases() ([]core.Phase, error) {
+func (p *Plugin) CreatePhases() ([]orc.Phase, error) {
 	// Create agents for each phase
 	plannerAgent := p.agentFactory.CreateAgent("planner", "prompts/architect.txt")
 	writerAgent := p.agentFactory.CreateAgent("writer", "prompts/writer.txt")
 	criticAgent := p.agentFactory.CreateAgent("critic", "prompts/critic.txt")
 
-	// Return phase pipeline
-	return []core.Phase{
-		fiction.NewSystematicPlanner(plannerAgent, p.logger),
-		fiction.NewTargetedWriter(writerAgent, p.storage, p.logger),
-		fiction.NewContextualEditor(criticAgent, p.storage, p.logger),
-		fiction.NewSystematicAssembler(p.storage, p.logger),
-	}, nil
+	// TODO: Import phases from local package once converted
+	// For now, return empty slice
+	return []orc.Phase{}, nil
 }
 
 // ValidateRequest checks if the request is suitable for fiction generation
@@ -64,8 +58,8 @@ func (p *Plugin) ValidateRequest(request string) error {
 }
 
 // GetOutputSpec returns expected outputs for fiction
-func (p *Plugin) GetOutputSpec() domain.OutputSpec {
-	return domain.OutputSpec{
+func (p *Plugin) GetOutputSpec() orc.OutputSpec {
+	return orc.OutputSpec{
 		PrimaryOutput: "manuscript.md",
 		SecondaryOutputs: []string{
 			"outline.json",
@@ -110,13 +104,13 @@ func (p *Plugin) GetDefaultConfig() map[string]interface{} {
 }
 
 // For binary plugin mode
-var PluginInstance domain.DomainPlugin
+var PluginInstance orc.Plugin
 
 func init() {
 	// Plugin will be initialized by the loader with dependencies
 }
 
 // InitPlugin is called by the plugin loader to inject dependencies
-func InitPlugin(agentFactory *core.AgentFactory, storage core.Storage, logger *slog.Logger) {
+func InitPlugin(agentFactory orc.AgentFactory, storage orc.Storage, logger orc.Logger) {
 	PluginInstance = NewPlugin(agentFactory, storage, logger)
 }
