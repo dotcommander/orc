@@ -58,9 +58,13 @@ orc/
 
 ## Development Context
 
-### Current State (Post-Iterator Architecture)
+### Current State (Post-Iterator Architecture + Plugin System)
 - ✅ **Iterator Agent System**: Infinite quality improvement until all criteria pass
 - ✅ **Multi-Domain Generation**: Fiction, Code (PHP/JS/Go), Documentation
+- ✅ **Enhanced Plugin System**: Auto-discovery of external plugins with built-in domain plugins
+- ✅ **Plugin Discovery**: XDG-compliant paths with configurable discovery locations
+- ✅ **External Plugin Support**: Shared object (.so) and executable plugin loading
+- ✅ **Plugin Configuration**: Per-plugin settings, timeouts, and enable/disable controls
 - ✅ **Quality-First Configuration**: 5min AI timeouts, 8-20min phase timeouts, 30 req/min rate limiting
 - ✅ **Robust JSON Parsing**: CleanJSONResponse handles malformed AI responses
 - ✅ **Verification Loops**: Automatic retry with issue tracking to `/issues` directory
@@ -104,6 +108,7 @@ All dependencies wired in `cmd/orchestrator/main.go`:
 - **Data**: `~/.local/share/orchestrator/`
 - **Prompts**: `~/.local/share/orchestrator/prompts/`
 - **Output**: `~/.local/share/orchestrator/output/`
+- **Plugins**: `~/.local/share/orchestrator/plugins/` (built-in and external)
 - **Binary**: `~/.local/bin/orchestrator`
 - **Logs**: `~/.local/state/orchestrator/` (error/debug logs)
 
@@ -121,12 +126,26 @@ All dependencies wired in `cmd/orchestrator/main.go`:
 
 ## Common Development Tasks
 
-### Adding a New Phase
-1. Create `internal/phases/newphase/newphase.go`
+### Adding a New Built-in Plugin
+1. Create `internal/domain/plugin/newplugin.go`
+2. Implement `DomainPlugin` interface with phases
+3. Register in `internal/plugin/integration.go` 
+4. Add default configuration in `config.yaml.example`
+5. Update plugin documentation
+
+### Adding a New Phase to Existing Plugin
+1. Create phase in `internal/phase/domain/newphase.go`
 2. Implement `Phase` interface
-3. Add to phase chain in `main.go`
-4. Create prompt template in `prompts/`
-5. Add configuration in `config.yaml`
+3. Add to plugin's `GetPhases()` method
+4. Create prompt template in prompts directory
+5. Update plugin tests
+
+### Creating an External Plugin
+1. Choose plugin type: shared object (.so) or executable
+2. Implement plugin interface (see plugin development guide)
+3. Install to `~/.local/share/orchestrator/plugins/external/`
+4. Configure in `config.yaml` if needed
+5. Test with `orc list plugins`
 
 ### Modifying AI Interactions
 - **Client Logic**: `internal/agent/agent.go`
@@ -192,12 +211,51 @@ make install
 # Quality-focused generation (recommended)
 ./orc create code "ONLY USE PHP. Create hello.php that echoes Hello World" --fluid --verbose
 
+# Plugin management
+./orc list plugins              # List all available plugins
+./orc list sessions            # List previous sessions
+
 # Resume interrupted sessions
 ./orc resume SESSION_ID
 
 # Check configuration and logs
 ./orc config get ai.model
+./orc config get plugins.settings.auto_discovery
 tail -f ~/.local/state/orchestrator/debug.log
+```
+
+## Plugin System Architecture
+
+### Built-in Domain Plugins
+- **Fiction Plugin**: Novel and story generation with quality iterations
+- **Code Plugin**: Code analysis, generation, and quality refinement
+- **Future**: Documentation, API, Testing, and other specialized plugins
+
+### External Plugin Support
+- **Shared Object Plugins**: Go-compiled .so files with plugin interface
+- **Executable Plugins**: Standalone binaries following plugin protocol
+- **Auto-Discovery**: Automatic scanning of configured plugin directories
+- **Configuration**: Per-plugin settings, timeouts, and enable/disable controls
+
+### Plugin Discovery Paths (searched in order)
+1. `~/.local/share/orchestrator/plugins/builtin` (built-in plugins)
+2. `~/.local/share/orchestrator/plugins/external` (user-installed plugins)
+3. `/usr/local/lib/orchestrator/plugins` (system-wide plugins)
+4. `/usr/lib/orchestrator/plugins` (distribution plugins)
+5. Additional paths from system PATH (for executable plugins)
+
+### Plugin Configuration Structure
+```yaml
+plugins:
+  discovery_paths: [...]           # Plugin search paths
+  settings:
+    auto_discovery: true           # Enable automatic plugin discovery
+    max_external_plugins: 10       # Limit external plugin loading
+  configurations:
+    plugin_name:
+      enabled: true               # Enable/disable specific plugins
+      settings: {...}             # Plugin-specific configuration
+      timeouts: {...}             # Custom timeout overrides
 ```
 
 ## Architecture Decision Records

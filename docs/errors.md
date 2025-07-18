@@ -147,13 +147,20 @@ response := phase.CleanJSONResponse(aiResponse)
 #### Common JSON Fixes Applied
 1. **Strip markdown**: Remove ````json` wrappers
 2. **Extract JSON**: Find `{...}` in mixed content
-3. **Escape newlines**: Convert literal `\n` to `\\n`
-4. **Remove trailing commas**: Fix `{...,}` syntax
-5. **Quote keys**: Convert `{key:value}` to `{"key":value}`
+3. **Escape newlines**: Convert literal `\n` to `\\n` within string values
+4. **Escape quotes**: Convert unescaped `"` to `\"` within string values
+5. **Remove trailing commas**: Fix `{...,}` syntax
+6. **Quote keys**: Convert `{key:value}` to `{"key":value}`
 
 **Prevention**: Always use `phase.CleanJSONResponse(response)` before `json.Unmarshal()`
+
+**Recent Fix (2025-07-18)**: 
+- Fixed incomplete regex pattern that failed to match complete JSON strings
+- Added proper quote escaping within string values
+- Now correctly handles nested code in `file_content` fields
+
 **Files Changed**: 
-- `/Users/vampire/go/src/orc/internal/phase/utils.go` - Added robust JSON cleaning
+- `/Users/vampire/go/src/orc/internal/phase/utils.go` - Fixed regex pattern and added quote escaping
 - `/Users/vampire/go/src/orc/internal/phase/code/*.go` - Applied to all code generation phases
 
 ### Error: `invalid character '`' looking for beginning of value`

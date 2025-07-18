@@ -1,0 +1,184 @@
+# Example Plugin Manifest
+# This demonstrates the structure of a plugin manifest file
+
+# Metadata
+name: "advanced-fiction"
+version: "1.0.0"
+description: "Advanced fiction writing plugin with character analysis and plot development"
+author: "Orchestrator Team"
+license: "MIT"
+homepage: "https://github.com/vampirenirmal/orchestrator"
+repository: "https://github.com/vampirenirmal/orchestrator-plugins"
+tags:
+  - fiction
+  - creative-writing
+  - novels
+created: 2024-01-15T10:00:00Z
+updated: 2024-01-20T15:30:00Z
+
+# Plugin Type and Compatibility
+type: "external"  # or "builtin"
+min_version: "1.0.0"  # Minimum orchestrator version
+max_version: "2.0.0"  # Maximum orchestrator version
+dependencies:
+  - "base-fiction"
+  - "ai-client"
+
+# Capabilities
+domains:
+  - fiction
+  
+phases:
+  - name: "character-analysis"
+    description: "Deep character development and motivation analysis"
+    order: 1
+    required: true
+    parallel: false
+    estimated_time: 10m
+    timeout: 20m
+    retryable: true
+    max_retries: 3
+    config_overrides:
+      ai.temperature: 0.8
+      
+  - name: "plot-architect"
+    description: "Advanced plot structure and pacing design"
+    order: 2
+    required: true
+    parallel: false
+    estimated_time: 15m
+    timeout: 30m
+    retryable: true
+    max_retries: 2
+    
+  - name: "dialogue-enhancer"
+    description: "Natural dialogue generation with character voice"
+    order: 3
+    required: false
+    parallel: true
+    estimated_time: 5m
+    timeout: 10m
+    retryable: true
+    max_retries: 3
+    
+  - name: "scene-writer"
+    description: "Detailed scene writing with sensory details"
+    order: 4
+    required: true
+    parallel: true
+    estimated_time: 20m
+    timeout: 40m
+    retryable: true
+    max_retries: 2
+    
+  - name: "consistency-checker"
+    description: "Verify plot consistency and continuity"
+    order: 5
+    required: true
+    parallel: false
+    estimated_time: 5m
+    timeout: 10m
+    retryable: false
+    max_retries: 0
+
+# Prompts mapping
+prompts:
+  character-analysis: "prompts/character_analysis.txt"
+  plot-architect: "prompts/plot_architect.txt"
+  dialogue-enhancer: "prompts/dialogue_enhancer.txt"
+  scene-writer: "prompts/scene_writer.txt"
+  consistency-checker: "prompts/consistency_checker.txt"
+
+# Output specification
+output_spec:
+  primary_output: "manuscript.md"
+  secondary_outputs:
+    - "characters.json"
+    - "plot_outline.md"
+    - "scene_list.json"
+    - "revision_notes.md"
+  file_patterns:
+    chapters: "chapters/chapter_*.md"
+    scenes: "scenes/ch*_sc*.md"
+    character_profiles: "characters/*.md"
+  descriptions:
+    manuscript.md: "Complete novel manuscript"
+    characters.json: "Character database with relationships"
+    plot_outline.md: "Detailed plot structure"
+    scene_list.json: "Scene breakdown with metadata"
+    revision_notes.md: "Notes for future revisions"
+
+# Resource requirements
+resource_spec:
+  min_memory: "2GB"
+  max_memory: "8GB"
+  cpu_shares: 2
+  network_required: true
+  storage_required: "1GB"
+  api_keys:
+    - "OPENAI_API_KEY"
+  environment_vars:
+    - "FICTION_STYLE"
+    - "TARGET_WORD_COUNT"
+  permissions:
+    - "file:read"
+    - "file:write"
+    - "network:openai"
+  rate_limits:
+    openai_requests_per_minute: 30
+    max_concurrent_requests: 5
+
+# Configuration schema (JSON Schema)
+config_schema:
+  type: object
+  properties:
+    style:
+      type: string
+      enum: ["literary", "genre", "experimental"]
+      default: "genre"
+    pov:
+      type: string
+      enum: ["first", "third-limited", "third-omniscient", "second"]
+      default: "third-limited"
+    tense:
+      type: string
+      enum: ["past", "present", "future"]
+      default: "past"
+    target_audience:
+      type: string
+      enum: ["young-adult", "adult", "middle-grade"]
+      default: "adult"
+    content_warnings:
+      type: array
+      items:
+        type: string
+    themes:
+      type: array
+      items:
+        type: string
+      minItems: 1
+      maxItems: 5
+
+# Default configuration values
+default_config:
+  style: "genre"
+  pov: "third-limited"
+  tense: "past"
+  target_audience: "adult"
+  content_warnings: []
+  themes: ["redemption"]
+  max_chapter_words: 5000
+  min_chapter_words: 2000
+  chapters_per_act: 7
+  total_acts: 3
+
+# Required configuration keys
+required_config:
+  - "themes"
+  - "target_audience"
+
+# Location and entry point
+location: "/path/to/plugin"  # Set by discovery
+entry_point: "fiction-plugin"  # Binary name or .so file
+binary: true  # False for .so plugins
+language: "go"  # Programming language

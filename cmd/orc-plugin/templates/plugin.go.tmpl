@@ -1,0 +1,186 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"time"
+
+	"github.com/vampirenirmal/orchestrator/internal/domain"
+	"github.com/vampirenirmal/orchestrator/internal/phase"
+)
+
+// {{.Name}}Plugin implements the domain.Plugin interface for {{.domain}} generation
+type {{.Name}}Plugin struct {
+	config map[string]interface{}
+}
+
+// NewPlugin creates a new instance of the plugin
+func NewPlugin() domain.Plugin {
+	return &{{.Name}}Plugin{
+		config: make(map[string]interface{}),
+	}
+}
+
+// Name returns the plugin name
+func (p *{{.Name}}Plugin) Name() string {
+	return "{{.name}}"
+}
+
+// Domain returns the plugin domain
+func (p *{{.Name}}Plugin) Domain() string {
+	return "{{.domain}}"
+}
+
+// GetPhases returns the execution phases for this plugin
+func (p *{{.Name}}Plugin) GetPhases() []domain.Phase {
+	return []domain.Phase{
+		&PlanningPhase{},
+		&GenerationPhase{},
+		&RefinementPhase{},
+		&AssemblyPhase{},
+	}
+}
+
+// PlanningPhase plans the {{.name}} structure
+type PlanningPhase struct {
+	phase.BasePhase
+}
+
+func (ph *PlanningPhase) Name() string {
+	return "{{.Name}} Planning"
+}
+
+func (ph *PlanningPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// Access the AI agent
+	agent := input.Agent
+	if agent == nil {
+		return domain.PhaseOutput{}, fmt.Errorf("AI agent not available")
+	}
+
+	// Load prompt template
+	promptTemplate, err := phase.LoadPrompt("planning.txt")
+	if err != nil {
+		return domain.PhaseOutput{}, fmt.Errorf("loading prompt: %w", err)
+	}
+
+	// Build prompt with user request
+	prompt := phase.RenderPrompt(promptTemplate, map[string]interface{}{
+		"Request": input.Request,
+	})
+
+	// Get AI response
+	response, err := agent.Complete(ctx, prompt)
+	if err != nil {
+		return domain.PhaseOutput{}, fmt.Errorf("AI completion failed: %w", err)
+	}
+
+	// Parse JSON response
+	var plan map[string]interface{}
+	if err := json.Unmarshal([]byte(response), &plan); err != nil {
+		return domain.PhaseOutput{}, fmt.Errorf("parsing response: %w", err)
+	}
+
+	return domain.PhaseOutput{
+		Success: true,
+		Data:    plan,
+		Message: "Planning completed successfully",
+	}, nil
+}
+
+func (ph *PlanningPhase) EstimatedDuration() time.Duration {
+	return 30 * time.Second
+}
+
+// GenerationPhase generates the main content
+type GenerationPhase struct {
+	phase.BasePhase
+}
+
+func (ph *GenerationPhase) Name() string {
+	return "{{.Name}} Generation"
+}
+
+func (ph *GenerationPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// Get planning output
+	plan, ok := input.PreviousOutputs["{{.Name}} Planning"]
+	if !ok {
+		return domain.PhaseOutput{}, fmt.Errorf("planning output not found")
+	}
+
+	// TODO: Implement generation logic based on your domain
+	// This is where you would generate the actual content
+
+	return domain.PhaseOutput{
+		Success: true,
+		Data:    map[string]interface{}{"generated": true},
+		Message: "Generation completed",
+	}, nil
+}
+
+func (ph *GenerationPhase) EstimatedDuration() time.Duration {
+	return 2 * time.Minute
+}
+
+// RefinementPhase refines and improves the generated content
+type RefinementPhase struct {
+	phase.BasePhase
+}
+
+func (ph *RefinementPhase) Name() string {
+	return "{{.Name}} Refinement"
+}
+
+func (ph *RefinementPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// TODO: Implement refinement logic
+	// This could include quality checks, consistency improvements, etc.
+
+	return domain.PhaseOutput{
+		Success: true,
+		Data:    map[string]interface{}{"refined": true},
+		Message: "Refinement completed",
+	}, nil
+}
+
+func (ph *RefinementPhase) EstimatedDuration() time.Duration {
+	return 1 * time.Minute
+}
+
+// AssemblyPhase assembles the final output
+type AssemblyPhase struct {
+	phase.BasePhase
+}
+
+func (ph *AssemblyPhase) Name() string {
+	return "{{.Name}} Assembly"
+}
+
+func (ph *AssemblyPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// TODO: Implement assembly logic
+	// Combine all previous outputs into final form
+
+	// Save output files
+	storage := input.Storage
+	if storage != nil {
+		content := fmt.Sprintf("# {{.Name}} Output\n\nGenerated content goes here...")
+		if err := storage.SaveOutput(input.SessionID, "output.md", []byte(content)); err != nil {
+			return domain.PhaseOutput{}, fmt.Errorf("saving output: %w", err)
+		}
+	}
+
+	return domain.PhaseOutput{
+		Success: true,
+		Data:    map[string]interface{}{"assembled": true},
+		Message: "Assembly completed - output saved",
+	}, nil
+}
+
+func (ph *AssemblyPhase) EstimatedDuration() time.Duration {
+	return 30 * time.Second
+}
+
+// Register the plugin on import
+func init() {
+	// This will be called when the plugin is imported
+	// The main application should handle registration
+}

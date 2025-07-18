@@ -31,3 +31,46 @@ limits:
   rate_limit:
     requests_per_minute: 60
     burst_size: 10
+
+# Plugin system configuration
+plugins:
+  # Plugin discovery paths (searched in order)
+  discovery_paths:
+    - "~/.local/share/orchestrator/plugins/builtin"
+    - "~/.local/share/orchestrator/plugins/external" 
+    - "/usr/local/lib/orchestrator/plugins"
+    - "/usr/lib/orchestrator/plugins"
+  
+  # Built-in plugins directory  
+  builtin_path: "~/.local/share/orchestrator/plugins/builtin"
+  
+  # External plugins directory
+  external_path: "~/.local/share/orchestrator/plugins/external"
+  
+  # Plugin-specific configurations
+  configurations:
+    fiction:
+      enabled: true
+      settings:
+        enhanced_prompts: true
+        quality_iterations: 5
+      timeouts:
+        planning: "45m"
+        writing: "3h"
+    
+    code:
+      enabled: true
+      settings:
+        enhanced_prompts: true
+        quality_iterations: 3
+        language_detection: true
+      timeouts:
+        analysis: "30m"
+        generation: "2h"
+  
+  # Global plugin settings
+  settings:
+    auto_discovery: true          # Automatically discover external plugins
+    max_external_plugins: 10      # Maximum number of external plugins to load
+    load_timeout: "30s"          # Timeout for loading individual plugins
+    enable_sandboxing: false     # Enable plugin sandboxing (future enhancement)

@@ -1,0 +1,74 @@
+.PHONY: build test clean install
+
+# Plugin name
+PLUGIN_NAME = {{.name}}
+BINARY_NAME = orchestrator-{{.name}}-plugin.so
+
+# Go parameters
+GOCMD = go
+GOBUILD = $(GOCMD) build
+GOTEST = $(GOCMD) test
+GOMOD = $(GOCMD) mod
+GOCLEAN = $(GOCMD) clean
+
+# Build flags
+LDFLAGS = -ldflags "-s -w"
+BUILDFLAGS = -buildmode=plugin
+
+# Paths
+INSTALL_PATH = ~/.local/share/orchestrator/plugins
+
+all: test build
+
+build:
+	@echo "Building $(PLUGIN_NAME) plugin..."
+	$(GOBUILD) $(BUILDFLAGS) $(LDFLAGS) -o $(BINARY_NAME) .
+
+test:
+	@echo "Running tests..."
+	$(GOTEST) -v ./...
+
+clean:
+	@echo "Cleaning..."
+	$(GOCLEAN)
+	rm -f $(BINARY_NAME)
+
+deps:
+	@echo "Downloading dependencies..."
+	$(GOMOD) download
+	$(GOMOD) tidy
+
+install: build
+	@echo "Installing plugin..."
+	mkdir -p $(INSTALL_PATH)
+	cp $(BINARY_NAME) $(INSTALL_PATH)/
+	cp manifest.yaml $(INSTALL_PATH)/$(PLUGIN_NAME).manifest.yaml
+	@echo "Plugin installed to $(INSTALL_PATH)"
+
+uninstall:
+	@echo "Uninstalling plugin..."
+	rm -f $(INSTALL_PATH)/$(BINARY_NAME)
+	rm -f $(INSTALL_PATH)/$(PLUGIN_NAME).manifest.yaml
+
+# Development helpers
+fmt:
+	@echo "Formatting code..."
+	go fmt ./...
+
+lint:
+	@echo "Running linter..."
+	golangci-lint run
+
+# Run as standalone (for testing)
+run:
+	$(GOCMD) run .
+
+help:
+	@echo "Available targets:"
+	@echo "  make build    - Build the plugin"
+	@echo "  make test     - Run tests"
+	@echo "  make install  - Install plugin locally"
+	@echo "  make clean    - Clean build artifacts"
+	@echo "  make deps     - Download dependencies"
+	@echo "  make fmt      - Format code"
+	@echo "  make lint     - Run linter"

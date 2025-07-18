@@ -1,0 +1,103 @@
+# {{.Name}} Plugin for Orchestrator
+
+{{.Description}}
+
+## Overview
+
+This plugin adds {{.name}} generation capabilities to the Orchestrator AI content generation system. It implements a multi-phase pipeline for creating high-quality {{.name}} content.
+
+## Installation
+
+### As a Built-in Plugin
+
+1. Clone this repository:
+```bash
+git clone {{.GitRepo}}
+cd orchestrator-{{.name}}-plugin
+```
+
+2. Build the plugin:
+```bash
+make build
+```
+
+3. Import in your main orchestrator:
+```go
+import _ "{{.GitRepo}}"
+```
+
+### As an External Plugin (Coming Soon)
+
+External plugin support will allow loading without recompiling the orchestrator.
+
+## Usage
+
+```bash
+orc create {{.domain}} "Create a {{.name}} about..."
+```
+
+## Development
+
+### Project Structure
+
+```
+orchestrator-{{.name}}-plugin/
+├── plugin.go          # Main plugin implementation
+├── manifest.yaml      # Plugin metadata and configuration
+├── prompts/          # AI prompt templates
+│   └── planning.txt  # Planning phase prompt
+├── go.mod           # Go module file
+├── Makefile         # Build automation
+└── README.md        # This file
+```
+
+### Adding New Phases
+
+1. Create a new phase struct implementing `domain.Phase`
+2. Add it to the `GetPhases()` method
+3. Update manifest.yaml with phase configuration
+4. Create corresponding prompt template
+
+### Testing
+
+Run tests with:
+```bash
+make test
+```
+
+### Configuration
+
+The plugin supports the following configuration options:
+
+- `max_length`: Maximum output length (default: 10000)
+- `quality_level`: Output quality level - draft/standard/premium (default: standard)
+- `enable_refinement`: Enable refinement phase (default: true)
+
+Configure in your orchestrator config.yaml:
+```yaml
+plugins:
+  {{.name}}:
+    max_length: 15000
+    quality_level: premium
+    enable_refinement: true
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Author
+
+{{.Author}}
+
+## Version
+
+{{.Version}}

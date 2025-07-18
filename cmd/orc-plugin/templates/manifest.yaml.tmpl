@@ -1,0 +1,69 @@
+name: {{.name}}
+version: {{.version}}
+description: {{.description}}
+author: {{.author}}
+domain: {{.domain}}
+type: builtin
+
+# Plugin dependencies and requirements
+requires:
+  orchestrator: ">=1.0.0"
+  go: ">=1.21"
+
+# Plugin capabilities (what the plugin needs access to)
+capabilities:
+  - ai        # Access to AI agent
+  - storage   # File storage access
+  - network   # Network access (if needed)
+
+# Resource requirements
+resources:
+  memory: 512MB
+  timeout: 10m
+
+# Phases configuration
+phases:
+  - name: "{{.Name}} Planning"
+    timeout: 30s
+    retryable: true
+    required: true
+    
+  - name: "{{.Name}} Generation"
+    timeout: 2m
+    retryable: true
+    required: true
+    parallel: false
+    
+  - name: "{{.Name}} Refinement"
+    timeout: 1m
+    retryable: true
+    required: false
+    
+  - name: "{{.Name}} Assembly"
+    timeout: 30s
+    retryable: false
+    required: true
+
+# Configuration schema (using JSON Schema)
+config_schema:
+  type: object
+  properties:
+    max_length:
+      type: integer
+      description: Maximum output length
+      default: 10000
+    quality_level:
+      type: string
+      enum: ["draft", "standard", "premium"]
+      default: "standard"
+    enable_refinement:
+      type: boolean
+      default: true
+
+# Prompt templates location
+prompts_dir: ./prompts
+
+# Output configuration
+output:
+  format: markdown
+  filename_pattern: "{{.name}}_{{.timestamp}}.md"

@@ -1,6 +1,11 @@
 package config
 
-import "time"
+import (
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
+)
 
 type Limits struct {
 	MaxConcurrentWriters int               `yaml:"max_concurrent_writers" validate:"required,min=1,max=100"`
@@ -40,6 +45,55 @@ func DefaultLimits() Limits {
 		RateLimit: RateLimitConfig{
 			RequestsPerMinute: 30,
 			BurstSize:        15,
+		},
+	}
+}
+
+// DefaultPluginsConfig returns default plugin configuration
+func DefaultPluginsConfig() PluginsConfig {
+	// Get XDG-compliant paths
+	var pluginPaths []string
+	var builtinPath, externalPath string
+	
+	// XDG data directory
+	if xdgData := os.Getenv("XDG_DATA_HOME"); xdgData != "" {
+		builtinPath = filepath.Join(xdgData, "orchestrator", "plugins", "builtin")
+		externalPath = filepath.Join(xdgData, "orchestrator", "plugins", "external")
+	} else {
+		home, _ := os.UserHomeDir()
+		builtinPath = filepath.Join(home, ".local", "share", "orchestrator", "plugins", "builtin")
+		externalPath = filepath.Join(home, ".local", "share", "orchestrator", "plugins", "external")
+	}
+	
+	// Standard plugin discovery paths
+	pluginPaths = []string{
+		builtinPath,
+		externalPath,
+		"/usr/local/lib/orchestrator/plugins",
+		"/usr/lib/orchestrator/plugins",
+	}
+	
+	// Add user's PATH for system-wide plugins
+	if binPath := os.Getenv("PATH"); binPath != "" {
+		// Add common binary paths for plugins
+		pathDirs := filepath.SplitList(binPath)
+		for _, dir := range pathDirs {
+			if strings.Contains(dir, "bin") {
+				pluginPaths = append(pluginPaths, dir)
+			}
+		}
+	}
+	
+	return PluginsConfig{
+		DiscoveryPaths: pluginPaths,
+		BuiltinPath:    builtinPath,
+		ExternalPath:   externalPath,
+		Configurations: make(map[string]PluginConfiguration),
+		Settings: PluginSettings{
+			AutoDiscovery:      true,
+			MaxExternalPlugins: 10,
+			LoadTimeout:        "30s",
+			EnableSandboxing:   false, // Future enhancement
 		},
 	}
 }

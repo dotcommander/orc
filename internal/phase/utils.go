@@ -30,6 +30,9 @@ func CleanJSONResponse(response string) string {
 	// Try to extract JSON from the response if it contains non-JSON content
 	response = extractJSON(response)
 	
+	// Apply additional fixes for deeply nested content
+	response = fixJSONString(response)
+	
 	return response
 }
 
@@ -80,22 +83,28 @@ func extractJSON(response string) string {
 // fixJSONString attempts to fix common JSON string issues
 func fixJSONString(jsonStr string) string {
 	// Fix unescaped newlines in string values
-	// This regex finds strings and replaces literal newlines with \n
-	re := regexp.MustCompile(`"([^"\\]*(\\.[^"\\]*)*)`)
+	// This regex finds complete JSON strings (including quotes)
+	re := regexp.MustCompile(`"([^"\\]*(\\.[^"\\]*)*)"`)
 	
 	jsonStr = re.ReplaceAllStringFunc(jsonStr, func(match string) string {
-		// Don't modify the opening quote
-		if len(match) <= 1 {
+		// Don't modify if too short
+		if len(match) <= 2 {
 			return match
 		}
 		
-		content := match[1:] // Remove opening quote
-		// Replace literal newlines with escaped newlines
+		// Extract content between quotes
+		content := match[1:len(match)-1]
+		
+		// Replace literal newlines and other control characters with escaped versions
 		content = strings.ReplaceAll(content, "\n", "\\n")
 		content = strings.ReplaceAll(content, "\r", "\\r")
 		content = strings.ReplaceAll(content, "\t", "\\t")
 		
-		return `"` + content
+		// Also escape any unescaped quotes within the content
+		// This is a bit tricky - we need to avoid double-escaping
+		content = regexp.MustCompile(`([^\\])"`).ReplaceAllString(content, `$1\"`)
+		
+		return `"` + content + `"`
 	})
 	
 	// Fix common trailing comma issues

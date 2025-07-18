@@ -13,9 +13,10 @@ import (
 )
 
 type Config struct {
-	AI     AIConfig    `yaml:"ai" validate:"required"`
-	Paths  PathsConfig `yaml:"paths" validate:"required"`
-	Limits Limits      `yaml:"limits" validate:"required"`
+	AI      AIConfig      `yaml:"ai" validate:"required"`
+	Paths   PathsConfig   `yaml:"paths" validate:"required"`
+	Limits  Limits        `yaml:"limits" validate:"required"`
+	Plugins PluginsConfig `yaml:"plugins" validate:"required"`
 }
 
 type AIConfig struct {
@@ -35,6 +36,51 @@ type PromptsConfig struct {
 	Architect    string `yaml:"architect" validate:"required,filepath"`
 	Writer       string `yaml:"writer" validate:"required,filepath"`
 	Critic       string `yaml:"critic" validate:"required,filepath"`
+}
+
+type PluginsConfig struct {
+	// Discovery paths for plugins (binary search paths)
+	DiscoveryPaths []string `yaml:"discovery_paths"`
+	
+	// Built-in plugins directory for domain-specific plugins
+	BuiltinPath string `yaml:"builtin_path"`
+	
+	// External plugins directory for user-installed plugins  
+	ExternalPath string `yaml:"external_path"`
+	
+	// Plugin-specific configurations
+	Configurations map[string]PluginConfiguration `yaml:"configurations,omitempty"`
+	
+	// Global plugin settings
+	Settings PluginSettings `yaml:"settings"`
+}
+
+type PluginConfiguration struct {
+	// Plugin-specific settings as key-value pairs
+	Settings map[string]interface{} `yaml:"settings,omitempty"`
+	
+	// Custom prompt overrides for this plugin
+	Prompts map[string]string `yaml:"prompts,omitempty"`
+	
+	// Plugin-specific timeout overrides
+	Timeouts map[string]string `yaml:"timeouts,omitempty"`
+	
+	// Enable/disable this plugin
+	Enabled bool `yaml:"enabled"`
+}
+
+type PluginSettings struct {
+	// Enable automatic plugin discovery
+	AutoDiscovery bool `yaml:"auto_discovery"`
+	
+	// Maximum number of external plugins to load
+	MaxExternalPlugins int `yaml:"max_external_plugins"`
+	
+	// Plugin load timeout
+	LoadTimeout string `yaml:"load_timeout"`
+	
+	// Enable plugin sandboxing (future enhancement)
+	EnableSandboxing bool `yaml:"enable_sandboxing"`
 }
 
 func Load() (*Config, error) {
@@ -157,6 +203,11 @@ func (c *Config) validate() error {
 	
 	if c.Limits.MaxConcurrentWriters == 0 {
 		c.Limits = DefaultLimits()
+	}
+	
+	// Set plugin defaults
+	if len(c.Plugins.DiscoveryPaths) == 0 {
+		c.Plugins = DefaultPluginsConfig()
 	}
 	
 	// Use validator for structured validation

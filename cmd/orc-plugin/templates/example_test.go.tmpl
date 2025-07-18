@@ -1,0 +1,145 @@
+package main
+
+import (
+	"context"
+	"testing"
+	"time"
+
+	"github.com/vampirenirmal/orchestrator/internal/domain"
+)
+
+// MockAgent implements a test AI agent
+type MockAgent struct {
+	responses map[string]string
+}
+
+func (m *MockAgent) Complete(ctx context.Context, prompt string) (string, error) {
+	return `{"title": "Test Output", "summary": "Test summary", "structure": ["intro", "body", "conclusion"]}`, nil
+}
+
+func (m *MockAgent) CompleteWithPersona(ctx context.Context, persona, prompt string) (string, error) {
+	return m.Complete(ctx, prompt)
+}
+
+func TestPluginCreation(t *testing.T) {
+	plugin := NewPlugin()
+	
+	if plugin.Name() != "{{.name}}" {
+		t.Errorf("Expected plugin name '{{.name}}', got '%s'", plugin.Name())
+	}
+	
+	if plugin.Domain() != "{{.domain}}" {
+		t.Errorf("Expected domain '{{.domain}}', got '%s'", plugin.Domain())
+	}
+}
+
+func TestGetPhases(t *testing.T) {
+	plugin := NewPlugin()
+	phases := plugin.GetPhases()
+	
+	expectedPhases := []string{
+		"{{.Name}} Planning",
+		"{{.Name}} Generation",
+		"{{.Name}} Refinement",
+		"{{.Name}} Assembly",
+	}
+	
+	if len(phases) != len(expectedPhases) {
+		t.Fatalf("Expected %d phases, got %d", len(expectedPhases), len(phases))
+	}
+	
+	for i, phase := range phases {
+		if phase.Name() != expectedPhases[i] {
+			t.Errorf("Expected phase %d to be '%s', got '%s'", i, expectedPhases[i], phase.Name())
+		}
+	}
+}
+
+func TestPlanningPhaseExecution(t *testing.T) {
+	phase := &PlanningPhase{}
+	
+	// Create test input
+	input := domain.PhaseInput{
+		Request: "Create a test {{.name}}",
+		Agent:   &MockAgent{},
+		Storage: nil,
+		Context: make(map[string]interface{}),
+	}
+	
+	// Execute phase
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	
+	output, err := phase.Execute(ctx, input)
+	if err != nil {
+		t.Fatalf("Phase execution failed: %v", err)
+	}
+	
+	if !output.Success {
+		t.Error("Expected phase execution to succeed")
+	}
+	
+	// Check that output contains expected data
+	data, ok := output.Data.(map[string]interface{})
+	if !ok {
+		t.Fatal("Expected output data to be a map")
+	}
+	
+	if _, exists := data["title"]; !exists {
+		t.Error("Expected output to contain 'title' field")
+	}
+}
+
+func TestPhaseValidation(t *testing.T) {
+	phase := &PlanningPhase{}
+	
+	// Test with empty input
+	emptyInput := domain.PhaseInput{}
+	err := phase.ValidateInput(context.Background(), emptyInput)
+	if err == nil {
+		t.Error("Expected validation to fail with empty input")
+	}
+	
+	// Test with valid input
+	validInput := domain.PhaseInput{
+		Request: "Create something",
+		Agent:   &MockAgent{},
+	}
+	err = phase.ValidateInput(context.Background(), validInput)
+	if err != nil {
+		t.Errorf("Expected validation to pass with valid input, got: %v", err)
+	}
+}
+
+func TestEstimatedDuration(t *testing.T) {
+	phases := []domain.Phase{
+		&PlanningPhase{},
+		&GenerationPhase{},
+		&RefinementPhase{},
+		&AssemblyPhase{},
+	}
+	
+	for _, phase := range phases {
+		duration := phase.EstimatedDuration()
+		if duration <= 0 {
+			t.Errorf("Phase %s has invalid duration: %v", phase.Name(), duration)
+		}
+	}
+}
+
+// Benchmark phase execution
+func BenchmarkPlanningPhase(b *testing.B) {
+	phase := &PlanningPhase{}
+	input := domain.PhaseInput{
+		Request: "Create a test {{.name}}",
+		Agent:   &MockAgent{},
+		Context: make(map[string]interface{}),
+	}
+	
+	ctx := context.Background()
+	
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_, _ = phase.Execute(ctx, input)
+	}
+}

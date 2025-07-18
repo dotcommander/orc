@@ -1,0 +1,79 @@
+# Example Built-in Plugin Manifest
+# This demonstrates a simpler manifest for a built-in plugin
+
+name: "code"
+version: "1.0.0"
+description: "Built-in code generation plugin"
+author: "Orchestrator Team"
+license: "MIT"
+tags:
+  - code
+  - programming
+  - development
+
+type: "builtin"
+
+domains:
+  - code
+
+phases:
+  - name: "conversational-explorer"
+    description: "Natural dialogue for understanding requirements"
+    order: 1
+    required: true
+    parallel: false
+    estimated_time: 5m
+    timeout: 10m
+    retryable: true
+    max_retries: 3
+    
+  - name: "incremental-builder"
+    description: "Build code incrementally with validation"
+    order: 2
+    required: true
+    parallel: false
+    estimated_time: 15m
+    timeout: 30m
+    retryable: true
+    max_retries: 2
+    
+  - name: "iterative-refiner"
+    description: "Iteratively improve code quality"
+    order: 3
+    required: true
+    parallel: false
+    estimated_time: 10m
+    timeout: 20m
+    retryable: true
+    max_retries: 3
+
+prompts:
+  conversational-explorer: "prompts/code_explorer.txt"
+  incremental-builder: "prompts/code_builder.txt"
+  iterative-refiner: "prompts/code_refiner.txt"
+
+output_spec:
+  primary_output: "project/"
+  secondary_outputs:
+    - "README.md"
+    - "requirements.txt"
+    - "package.json"
+    - "go.mod"
+  descriptions:
+    project/: "Complete project directory"
+    README.md: "Project documentation"
+    requirements.txt: "Python dependencies"
+    package.json: "Node.js dependencies"
+    go.mod: "Go module file"
+
+resource_spec:
+  network_required: true
+  api_keys:
+    - "OPENAI_API_KEY"
+
+default_config:
+  language: "auto-detect"
+  framework: "none"
+  style: "clean"
+  testing: true
+  documentation: true
