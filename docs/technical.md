@@ -1,287 +1,158 @@
-# Systematic AI Novel Generation - Technical Reference
+# How Orc Works
 
-**AI Context**: Complete technical documentation for The Orchestrator's revolutionary systematic approach to AI novel generation with word budget engineering and contextual intelligence.
+Orc uses a revolutionary systematic approach to generate high-quality content through AI orchestration. This document explains the concepts behind Orc's unique capabilities.
 
-**Cross-references**: [`../PLAN.md`](../PLAN.md) for strategic overview, [`../SYSTEMATIC_ARCHITECTURE.md`](../SYSTEMATIC_ARCHITECTURE.md) for deep technical dive, [`../CLAUDE.md`](../CLAUDE.md) for development navigation, [`flow.md`](flow.md) for execution flows, [`patterns.md`](patterns.md) for implementation patterns, [`errors.md`](errors.md) for troubleshooting.
+## The Innovation: Word Budget Engineering
 
-## Revolutionary Systematic Architecture
+Traditional AI systems often produce shallow or uneven content because they don't manage their "creative resources" effectively. Orc solves this with **Word Budget Engineering**:
 
-The Orchestrator implements **Word Budget Engineering** - the first mathematically reliable approach to AI novel generation. Instead of hoping AI produces the right length, we **engineer the exact structure** that guarantees predictable results.
+### How It Works
 
-### Core Innovation: Mathematical Precision
+1. **Budget Allocation**: When you request a 50,000-word novel, Orc allocates specific word counts to each part:
+   - Overall structure planning: 2,000 words
+   - Chapter outlines: 5,000 words  
+   - Character development: 3,000 words
+   - Actual prose: 40,000 words
 
-```
-Traditional: "Write a 20k word novel" → Unpredictable (3k-15k words)
-Systematic:  20 chapters × 1,000 words → Reliable (20,100 words = 100.5% accuracy)
-```
+2. **Quality Through Specificity**: Instead of asking AI to "write a novel," Orc breaks it down:
+   - "Design a three-act structure with these themes"
+   - "Create a detailed plan for Chapter 3 (2,500 words)"
+   - "Write scene 2 of Chapter 3 focusing on character conflict"
 
-**Breakthrough Result**: Proven 100.5% word count accuracy through systematic orchestration.
+3. **Systematic Quality**: Each phase has specific quality criteria:
+   - Planning must include complete story arcs
+   - Characters must have clear motivations
+   - Scenes must advance the plot
+   - Prose must maintain consistent style
 
-### Systematic Architecture Principles
+## Why This Matters for Your Content
 
-#### 1. Word Budget Engineering
-Mathematical approach to predictable creative output:
-- **Structured Planning**: 20 chapters × 1,000 words = 20,000 words exactly
-- **Scene-Level Precision**: 3 scenes × 333 words = 1,000 words per chapter  
-- **Mathematical Certainty**: Engineering replaces hoping
+### Fiction Generation
+When generating fiction, Orc ensures:
+- **Consistent plot**: No forgotten subplots or character inconsistencies
+- **Balanced pacing**: Each chapter gets appropriate development
+- **Deep character development**: Dedicated focus on character arcs
+- **Quality prose**: Multiple refinement passes for style and voice
 
-#### 2. Contextual Intelligence  
-Every component has complete novel awareness:
-- **Full Story Context**: AI knows entire story before writing each scene
-- **Editor Intelligence**: Reads complete novel before making improvements
-- **Progressive Awareness**: Each phase builds on complete context
+### Code Generation
+For code projects, Orc provides:
+- **Complete architecture**: Full system design before implementation
+- **Consistent patterns**: Same coding style throughout
+- **Error handling**: Comprehensive error cases considered
+- **Documentation**: Inline comments and README generation
 
-#### 3. Systematic Phase Pipeline
-Revolutionary phase structure optimized for AI strengths:
-```
-SystematicPlanner → TargetedWriter → ContextualEditor → SystematicAssembler
-```
+## The Multi-Phase Process
 
-#### 4. AI-Friendly Design
-Works with AI's natural abilities rather than against them:
-- **Conversational Development**: Natural dialogue for story creation
-- **Manageable Chunks**: 333-word scenes optimal for AI composition
-- **Context Provision**: Complete story awareness improves AI performance
+Orc generates content through specialized phases, each with a specific purpose:
 
-## Core Interfaces & Contracts
+### 1. Planning Phase
+- Analyzes your request
+- Creates a detailed outline
+- Allocates word budgets
+- Sets quality criteria
 
-### Phase Interface
+### 2. Content Generation Phase
+- Works on multiple sections in parallel
+- Maintains consistency across parts
+- Follows the established plan
+- Manages pacing and flow
 
-The `Phase` interface defines the contract for all pipeline phases.
+### 3. Refinement Phase
+- Reviews generated content
+- Ensures quality standards
+- Fixes inconsistencies
+- Polishes final output
 
-```go
-// Package: internal/core
-type Phase interface {
-    // Name returns the human-readable phase name for logging and debugging
-    Name() string
-    
-    // Execute runs the phase with the given input and returns structured output
-    Execute(ctx context.Context, input PhaseInput) (PhaseOutput, error)
-    
-    // ValidateInput performs pre-flight checks on input before execution
-    ValidateInput(ctx context.Context, input PhaseInput) error
-    
-    // ValidateOutput verifies output meets phase requirements
-    ValidateOutput(ctx context.Context, output PhaseOutput) error
-    
-    // EstimatedDuration returns expected execution time for timeout configuration
-    EstimatedDuration() time.Duration
-    
-    // CanRetry determines if an error is retryable for this specific phase
-    CanRetry(err error) bool
-}
-```
+### 4. Assembly Phase
+- Combines all parts
+- Formats final output
+- Creates organized file structure
+- Generates any supporting files
 
-**Implementation Example**:
-```go
-type MyPhase struct {
-    agent   Agent
-    storage Storage
-    config  MyPhaseConfig
-}
+## Advanced Features
 
-func (p *MyPhase) Execute(ctx context.Context, input PhaseInput) (PhaseOutput, error) {
-    // Phase-specific implementation
-    result, err := p.agent.Execute(ctx, p.buildPrompt(input), input.Data)
-    if err != nil {
-        return PhaseOutput{}, err
-    }
-    
-    return PhaseOutput{
-        Data: result,
-        Metadata: map[string]interface{}{
-            "phase": p.Name(),
-            "timestamp": time.Now(),
-        },
-    }, nil
-}
+### Parallel Processing
+Orc can work on multiple chapters or code modules simultaneously while maintaining consistency. This dramatically reduces generation time without sacrificing quality.
+
+### Checkpointing and Resume
+Long projects are automatically saved at each phase. If interrupted, you can resume exactly where you left off:
+```bash
+orc resume SESSION_ID
 ```
 
-### Agent Interface
+### Quality Verification
+Every output goes through verification:
+- **Completeness**: All requested content is present
+- **Consistency**: Characters, plot, and style remain consistent
+- **Accuracy**: Code compiles and follows best practices
+- **Formatting**: Proper structure and organization
 
-The `Agent` interface abstracts AI client interactions.
+### Iterative Refinement
+Orc can make multiple improvement passes:
+- Identify areas needing improvement
+- Apply targeted enhancements
+- Verify improvements meet quality standards
+- Repeat until optimal quality is achieved
 
-```go
-type Agent interface {
-    // Execute sends a prompt to the AI and returns the response
-    Execute(ctx context.Context, prompt string, input any) (string, error)
-    
-    // ExecuteJSON requests structured JSON response from the AI
-    ExecuteJSON(ctx context.Context, prompt string, input any) (string, error)
-}
-```
+## Customization Options
 
-### Storage Interface
+### Model Selection
+Choose the AI model that best fits your needs:
+- **Claude 3.5 Sonnet**: Best balance of speed and quality
+- **Claude 3 Opus**: Highest quality, longer generation time
+- **GPT-4**: Alternative option with different strengths
 
-The `Storage` interface provides persistent data management.
+### Output Formats
+Orc supports various output formats:
+- **Markdown**: Default format, easy to read and convert
+- **Plain Text**: Simple format for maximum compatibility
+- **Structured Folders**: Organized by chapters/modules
+- **JSON**: For programmatic processing
 
-```go
-type Storage interface {
-    // Save writes data to the specified path
-    Save(ctx context.Context, path string, data []byte) error
-    
-    // Load reads data from the specified path
-    Load(ctx context.Context, path string) ([]byte, error)
-    
-    // List returns file paths matching the pattern
-    List(ctx context.Context, pattern string) ([]string, error)
-    
-    // Exists checks if a path exists
-    Exists(ctx context.Context, path string) bool
-    
-    // Delete removes data at the specified path
-    Delete(ctx context.Context, path string) error
-}
-```
+### Quality vs Speed Trade-offs
+You can adjust settings to prioritize:
+- **Maximum Quality**: More iterations, longer timeouts
+- **Balanced**: Default settings for most use cases
+- **Fast Generation**: Reduced iterations, shorter timeouts
 
-### Goal System Interfaces
+## Technical Benefits
 
-#### Goal Interface
-```go
-type Goal struct {
-    Type        GoalType
-    Target      interface{}
-    Current     interface{}
-    Priority    int
-    Met         bool
-    Validator   func(interface{}) bool
-}
+### Reliability
+- **Automatic retries**: Handles temporary failures gracefully
+- **Progress saving**: Never lose work due to interruptions
+- **Error recovery**: Continues from last successful point
+- **Rate limit handling**: Respects API limits automatically
 
-// Methods
-func (g *Goal) Progress() float64    // Returns 0-100% progress
-func (g *Goal) Gap() interface{}     // Returns deficit for numeric goals
-```
+### Efficiency
+- **Parallel processing**: Faster generation without quality loss
+- **Smart caching**: Avoids redundant API calls
+- **Resource optimization**: Uses API tokens efficiently
+- **Incremental generation**: See results as they're created
 
-#### Strategy Interface
-```go
-type Strategy interface {
-    // Name returns the strategy identifier
-    Name() string
-    
-    // CanHandle checks if this strategy can handle the given goals
-    CanHandle(goals []*Goal) bool
-    
-    // Execute applies the strategy to achieve the goals
-    Execute(ctx context.Context, input interface{}, goals []*Goal) (interface{}, error)
-    
-    // EstimateEffectiveness returns a score 0-1 for how well this strategy fits
-    EstimateEffectiveness(goals []*Goal) float64
-}
-```
+### Scalability
+- **Handle large projects**: Novels, full applications, documentation sets
+- **Concurrent operations**: Multiple projects simultaneously
+- **Flexible architecture**: Adapts to different content types
+- **Plugin system**: Extend for new domains
 
-## Data Structures
+## Getting Started
 
-### PhaseInput
-```go
-type PhaseInput struct {
-    Request   string                 // User's original request
-    Prompt    string                 // Phase-specific prompt template
-    Data      interface{}            // Output from previous phase
-    SessionID string                 // Session identifier for checkpointing
-    Metadata  map[string]interface{} // Additional context
-}
-```
+Ready to experience Orc's revolutionary approach? Here's how:
 
-### PhaseOutput
-```go
-type PhaseOutput struct {
-    Data     interface{}            // Primary phase output
-    Error    error                  // Execution error if any
-    Metadata map[string]interface{} // Additional context and metrics
-}
-```
+1. **Install Orc**: Follow the installation guide
+2. **Configure**: Set your API key and preferences
+3. **Start Creating**: 
+   ```bash
+   orc "Write a mystery novel set in Victorian London"
+   orc create code "Build a REST API for a task manager"
+   ```
 
-## Architecture Layers
+## Learn More
 
-### 1. Domain Layer (`internal/domain/`)
-- **Plugin interfaces**: Abstract plugin contracts
-- **Business logic**: Core domain models and rules
-- **Plugin implementations**: Fiction and Code plugins
+- **Configuration**: See [`configuration.md`](configuration.md) for setup options
+- **Performance**: Check [`performance.md`](performance.md) for optimization tips
+- **Examples**: Visit [`examples/`](examples/) for sample outputs
 
-### 2. Core Layer (`internal/core/`)
-- **Orchestrator**: Main coordination logic
-- **Goal System**: Goal tracking and strategies
-- **Phase management**: Execution engine and validation
-- **Error handling**: Structured error types and recovery
+---
 
-### 3. Infrastructure Layer (`internal/`)
-- **Agent**: AI client implementation with caching
-- **Storage**: File system storage with XDG compliance
-- **Config**: Configuration management and validation
-- **Adapter**: Clean architecture adapters
-
-### 4. Application Layer (`cmd/orc/`)
-- **CLI interface**: User-facing command-line tool
-- **Dependency wiring**: Dependency injection setup
-- **Option handling**: Configuration and flag processing
-
-## Performance Architecture
-
-### Execution Engine
-The extracted `ExecutionEngine` provides:
-- **Caching**: Response caching with TTL
-- **Concurrency**: Parallel execution where possible  
-- **Retry logic**: Exponential backoff with circuit breakers
-- **Validation**: Input/output validation pipeline
-
-### Optimization Features
-- **Worker pools**: Parallel scene generation
-- **Response cache**: 24-hour TTL with size limits
-- **Checkpointing**: Resume from failures
-- **Smart defaults**: Zero-configuration operation
-
-## Error Handling
-
-### PhaseError Structure
-```go
-type PhaseError struct {
-    Phase   string      // Phase name where error occurred
-    Attempt int         // Retry attempt number
-    Cause   error       // Underlying error
-    Partial interface{} // Partial results for recovery
-}
-```
-
-### Error Categories
-- **Validation errors**: Input/output contract violations
-- **Retry errors**: Temporary failures (API timeouts, rate limits)
-- **Terminal errors**: Permanent failures (invalid API keys, malformed prompts)
-- **Partial errors**: Failures with recoverable state
-
-## Configuration Architecture
-
-### Consolidated Configuration
-```go
-type OrchestratorConfig struct {
-    CheckpointingEnabled bool
-    MaxRetries          int
-    PerformanceEnabled  bool
-    MaxConcurrency      int
-}
-```
-
-### XDG Compliance
-- **Config**: `~/.config/orchestrator/config.yaml`
-- **Data**: `~/.local/share/orchestrator/`
-- **Cache**: `~/.cache/orchestrator/`
-- **Logs**: `~/.local/state/orchestrator/`
-
-## Plugin Architecture
-
-### Plugin Interface
-```go
-type Plugin interface {
-    Name() string
-    Description() string
-    GetPhases() []Phase
-    ValidateRequest(request string) error
-    GetOutputSpec() OutputSpec
-}
-```
-
-### Available Plugins
-- **Fiction Plugin**: Novel and story generation
-- **Code Plugin**: Code analysis and generation
-- **Docs Plugin**: Documentation generation (planned)
-
-This technical documentation provides both the architectural overview and detailed API contracts needed for development and AI assistant navigation.
+*Orc brings professional content generation to everyone through the power of systematic AI orchestration.*

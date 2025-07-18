@@ -1,8 +1,8 @@
 # Configuration Guide
 
-**AI Context**: Complete configuration reference for The Orchestrator. Use this for understanding all configuration options, XDG compliance, and environment setup.
+# Configuration Guide
 
-**Cross-references**: [`../CLAUDE.md`](../CLAUDE.md) for quick reference, [`../README.md`](../README.md) for basic setup, [`development.md`](development.md) for development configuration, [`paths.md`](paths.md) for file locations, [`errors.md`](errors.md) for configuration troubleshooting.
+This guide explains how to configure Orc for generating novels, code, and other content. Orc uses a simple YAML configuration file and environment variables.
 
 ## Overview
 
@@ -181,11 +181,11 @@ paths:
     critic: "/path/to/critic.txt"
 ```
 
-**Path Resolution**:
-- **Relative paths**: Resolved relative to config file location
-- **Absolute paths**: Used as-is
-- **Empty values**: Use XDG-compliant defaults
-- **`~` expansion**: Home directory is expanded automatically
+**Default Locations**:
+- Configuration is stored in `~/.config/orchestrator/`
+- Generated content is saved to `~/.local/share/orchestrator/output/`
+- Prompt templates are in `~/.local/share/orchestrator/prompts/`
+- You can override any of these paths in the configuration
 
 ### Limits Configuration (`limits`)
 
@@ -288,89 +288,59 @@ orc -config /path/to/config.yaml -validate
 orc -config /path/to/config.yaml -show-config
 ```
 
-## Development Configuration
+## Advanced Configuration Examples
 
-### Development-Specific Settings
+### High-Performance Setup
+
+For users with good API quotas who want faster generation:
 
 ```yaml
-# Development config example
 ai:
-  api_key: "test-key"
-  timeout: 30  # Shorter timeouts for testing
-
-paths:
-  output_dir: "./test-output"
-  prompts:
-    orchestrator: "./prompts/orchestrator.txt"
-    architect: "./prompts/architect.txt"
-    writer: "./prompts/writer.txt"
-    critic: "./prompts/critic.txt"
+  timeout: 180  # Allow more time for complex requests
 
 limits:
-  max_concurrent_writers: 2  # Lower for debugging
-  max_retries: 1            # Fail fast in development
-  phase_timeout: "5m"       # Shorter timeouts
-  total_timeout: "30m"
+  max_concurrent_writers: 15  # More parallel processing
+  max_retries: 5              # More resilient to failures
+  phase_timeout: "45m"        # Allow longer for quality
+  total_timeout: "6h"         # Support longer projects
+```
 
-log:
-  level: "debug"            # Verbose logging
-  format: "text"            # Human-readable
-  file: "./debug.log"       # Local log file
+### Conservative API Usage
 
+For users who want to minimize API costs:
+
+```yaml
+limits:
+  max_concurrent_writers: 2   # Minimal parallel requests
+  max_retries: 1              # Fail fast to save costs
+  phase_timeout: "15m"        # Shorter timeouts
+  total_timeout: "2h"         # Limit total runtime
+```
+
+## Quick Configuration Examples
+
+### Basic Setup for Novel Writing
+
+```yaml
+# ~/.config/orchestrator/config.yaml
+ai:
+  model: "claude-3-5-sonnet-20241022"  # Best for creative writing
+  
+limits:
+  max_concurrent_writers: 8   # Good balance
+  phase_timeout: "30m"        # Allow time for quality
+```
+
+### Setup for Code Generation
+
+```yaml
+# ~/.config/orchestrator/config.yaml
+ai:
+  model: "claude-3-5-sonnet-20241022"  # Great for code too
+  timeout: 150                          # More time for complex code
+  
 features:
-  debug_mode: true          # Enable debug features
-  enable_caching: false     # Disable caching for testing
-```
-
-### Testing Configuration
-
-```yaml
-# Testing config for CI/CD
-ai:
-  api_key: "${OPENAI_API_KEY}"  # From environment
-  model: "claude-3-5-sonnet-20241022"
-  timeout: 60
-
-paths:
-  output_dir: "/tmp/orchestrator-test"
-
-limits:
-  max_concurrent_writers: 3
-  max_retries: 2
-  phase_timeout: "10m"
-  total_timeout: "1h"
-
-log:
-  level: "warn"             # Minimal logging in tests
-  format: "json"            # Structured for parsing
-```
-
-## Configuration Migration
-
-### Upgrading from Previous Versions
-
-```bash
-# Backup existing configuration
-cp ~/.config/orchestrator/config.yaml ~/.config/orchestrator/config.yaml.backup
-
-# Update configuration format (if needed)
-orc -migrate-config
-
-# Validate new configuration
-orc -validate
-```
-
-### Configuration Templates
-
-```bash
-# Generate default configuration
-orc -generate-config > ~/.config/orchestrator/config.yaml
-
-# Generate development configuration
-orc -generate-config -dev > config-dev.yaml
-
-# Generate production configuration
-orc -generate-config -prod > config-prod.yaml
+  enable_checkpointing: true  # Save progress for long projects
 ```
 
 ## Troubleshooting Configuration
@@ -401,20 +371,17 @@ orc -generate-config -prod > config-prod.yaml
    Solution: Check prompt paths in configuration and ensure files exist
    ```
 
-### Debug Configuration Loading
+### Verifying Your Configuration
 
 ```bash
-# Show effective configuration
-orc -show-config
+# Check if Orc can find your configuration
+orc config get ai.model
 
-# Show configuration sources
-orc -debug-config
+# Test your API key is working
+orc test-connection
 
-# Validate configuration
-orc -validate
-
-# Test configuration with dry run
-orc -dry-run "test prompt"
+# See all current settings
+orc config list
 ```
 
 ## Security Considerations
@@ -454,6 +421,8 @@ chmod 755 ~/.local/share/orchestrator
 
 ---
 
-**Next Steps**: See [`troubleshooting.md`](troubleshooting.md) for configuration-related issues, [`development.md`](development.md) for development setup, or [`../README.md`](../README.md) for basic usage.
+## Next Steps
 
-**Last Updated**: 2025-07-16
+- Run `orc "Write a short story about robots"` to test your setup
+- See [`performance.md`](performance.md) to optimize generation speed
+- Check [`troubleshooting.md`](troubleshooting.md) if you encounter issues
