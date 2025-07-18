@@ -37,3 +37,6 @@ Thumbs.db
 # Build artifacts
 /dist/
 /build/
+# Test output directories
+fiction_*/
+code_*/
