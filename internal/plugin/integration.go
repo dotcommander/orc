@@ -67,26 +67,14 @@ func NewPluginIntegrator(cfg *config.Config, logger *slog.Logger) *PluginIntegra
 	}
 }
 
-// InitializeBuiltinPlugins registers the built-in domain plugins
+// InitializeBuiltinPlugins now only logs that built-in plugins are deprecated
 func (pi *PluginIntegrator) InitializeBuiltinPlugins(domainAgent domain.Agent, storage domain.Storage, promptsDir string, aiClient agent.AIClient) error {
-	pi.logger.Info("Initializing built-in domain plugins")
+	pi.logger.Info("Built-in plugins are deprecated. Use external plugins in plugins/ directory")
 	
-	// Register fiction plugin
-	fictionPlugin := domainPlugin.NewFictionPlugin(domainAgent, storage, promptsDir, aiClient)
-	if err := pi.domainRegistry.Register(fictionPlugin); err != nil {
-		return fmt.Errorf("failed to register fiction plugin: %w", err)
-	}
-	pi.logger.Info("Registered fiction plugin")
+	// TODO: Remove this method entirely once migration is complete
+	// For now, we'll try to load fiction and code as external plugins
 	
-	// Register code plugin
-	codePlugin := domainPlugin.NewCodePlugin(domainAgent, storage, promptsDir, aiClient)
-	if err := pi.domainRegistry.Register(codePlugin); err != nil {
-		return fmt.Errorf("failed to register code plugin: %w", err)
-	}
-	pi.logger.Info("Registered code plugin")
-	
-	pi.logger.Info("Built-in plugins initialized successfully", 
-		"plugins", len(pi.domainRegistry.List()))
+	pi.logger.Info("Attempting to load fiction and code as external plugins")
 	
 	return nil
 }

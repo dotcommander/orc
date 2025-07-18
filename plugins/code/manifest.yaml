@@ -1,0 +1,92 @@
+name: code
+version: 1.0.0
+description: AI-powered code generation with best practices
+author: Orc Team
+license: MIT
+homepage: https://github.com/dotcommander/orc-plugin-code
+
+# Plugin type and compatibility
+type: builtin  # Can be: builtin, external, binary
+min_orc_version: 0.1.0
+language: go
+
+# Capabilities
+domains:
+  - code
+
+# Phase configuration
+phases:
+  - name: ConversationalExplorer
+    description: Natural dialogue to understand project requirements
+    order: 1
+    timeout: 8m
+    required: true
+    
+  - name: IncrementalBuilder
+    description: Builds code incrementally with best practices
+    order: 2
+    timeout: 15m
+    required: true
+    
+  - name: IterativeRefiner
+    description: Refines code quality through multiple iterations
+    order: 3
+    timeout: 20m
+    required: true
+
+# Prompts mapping
+prompts:
+  explorer: prompts/code_explorer.txt
+  planner: prompts/code_planner.txt
+  builder: prompts/code_builder.txt
+  refiner: prompts/code_refiner.txt
+
+# Output specification
+output_spec:
+  primary_output: src/
+  secondary_outputs:
+    - README.md
+    - requirements.txt
+    - package.json
+    - go.mod
+    - tests/
+    - docs/
+  file_patterns:
+    source: "src/**/*"
+    tests: "tests/**/*"
+    docs: "docs/**/*.md"
+
+# Configuration schema
+config_schema:
+  type: object
+  properties:
+    language_detection:
+      type: boolean
+      default: true
+      description: Auto-detect programming language
+    quality_checks:
+      type: boolean
+      default: true
+      description: Enable code quality verification
+    test_generation:
+      type: boolean
+      default: true
+      description: Generate unit tests
+    documentation:
+      type: boolean
+      default: true
+      description: Generate inline documentation
+    max_iterations:
+      type: integer
+      default: 10
+      minimum: 1
+      maximum: 100
+      description: Maximum refinement iterations
+
+# Default configuration
+default_config:
+  language_detection: true
+  quality_checks: true
+  test_generation: true
+  documentation: true
+  max_iterations: 10

@@ -1,0 +1,87 @@
+name: fiction
+version: 1.0.0
+description: AI-powered fiction and novel generation
+author: Orc Team
+license: MIT
+homepage: https://github.com/dotcommander/orc-plugin-fiction
+
+# Plugin type and compatibility
+type: builtin  # Can be: builtin, external, binary
+min_orc_version: 0.1.0
+language: go
+
+# Capabilities
+domains:
+  - fiction
+
+# Phase configuration
+phases:
+  - name: SystematicPlanner
+    description: Creates detailed story structure and chapter outlines
+    order: 1
+    timeout: 5m
+    required: true
+    
+  - name: TargetedWriter
+    description: Writes chapters based on detailed outlines
+    order: 2
+    timeout: 30m
+    required: true
+    parallel: true
+    
+  - name: ContextualEditor
+    description: Reviews and improves the complete manuscript
+    order: 3
+    timeout: 20m
+    required: true
+    
+  - name: SystematicAssembler
+    description: Assembles final manuscript with formatting
+    order: 4
+    timeout: 2m
+    required: true
+
+# Prompts mapping
+prompts:
+  planner: prompts/architect.txt
+  writer: prompts/writer.txt
+  editor: prompts/critic.txt
+
+# Output specification
+output_spec:
+  primary_output: manuscript.md
+  secondary_outputs:
+    - outline.json
+    - characters.json
+    - chapters/
+  file_patterns:
+    chapters: "chapters/chapter_*.md"
+    metadata: "*.json"
+
+# Configuration schema
+config_schema:
+  type: object
+  properties:
+    chapter_word_target:
+      type: integer
+      default: 3000
+      minimum: 500
+      maximum: 10000
+    quality_threshold:
+      type: number
+      default: 0.8
+      minimum: 0.0
+      maximum: 1.0
+    style_consistency:
+      type: boolean
+      default: true
+    enable_outlining:
+      type: boolean
+      default: true
+
+# Default configuration
+default_config:
+  chapter_word_target: 3000
+  quality_threshold: 0.8
+  style_consistency: true
+  enable_outlining: true
