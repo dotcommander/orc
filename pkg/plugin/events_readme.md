@@ -19,7 +19,7 @@ A thread-safe, production-ready event bus system for inter-plugin communication 
 ### Basic Usage
 
 ```go
-import "github.com/vampirenirmal/orchestrator/pkg/plugin"
+import "github.com/dotcommander/orc/pkg/plugin"
 
 // Create event bus
 bus := plugin.NewEventBus(logger)

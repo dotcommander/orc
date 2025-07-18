@@ -9,10 +9,10 @@ import (
 	"plugin"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/agent"
-	"github.com/vampirenirmal/orchestrator/internal/config"
-	"github.com/vampirenirmal/orchestrator/internal/domain"
-	domainPlugin "github.com/vampirenirmal/orchestrator/internal/domain/plugin"
+	"github.com/dotcommander/orc/internal/agent"
+	"github.com/dotcommander/orc/internal/config"
+	"github.com/dotcommander/orc/internal/domain"
+	domainPlugin "github.com/dotcommander/orc/internal/domain/plugin"
 )
 
 // PluginIntegrator manages both domain (built-in) and external plugins

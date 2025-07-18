@@ -235,7 +235,7 @@ func (c *Config) validate() error {
 
 // createConfigInteractively creates a new config file with user input
 func createConfigInteractively(configPath string) (*Config, error) {
-	fmt.Printf("🚀 Welcome to Refiner! Let's set up your configuration.\n\n")
+	fmt.Printf("🚀 Welcome to Orc! Let's set up your configuration.\n\n")
 	
 	// Create config directory
 	configDir := filepath.Dir(configPath)

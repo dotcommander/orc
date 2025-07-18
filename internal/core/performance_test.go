@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // TestPerformanceOptimizations verifies the optimization features work correctly

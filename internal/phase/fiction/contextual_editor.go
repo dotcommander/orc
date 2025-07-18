@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // ContextualEditor improves the entire novel chapter by chapter with full story context

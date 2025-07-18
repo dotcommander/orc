@@ -33,8 +33,8 @@ This package provides a comprehensive plugin discovery, loading, and management 
 ```go
 import (
     "log/slog"
-    "github.com/vampirenirmal/orchestrator/pkg/plugin"
-    domainPlugin "github.com/vampirenirmal/orchestrator/internal/domain/plugin"
+    "github.com/dotcommander/orc/pkg/plugin"
+    domainPlugin "github.com/dotcommander/orc/internal/domain/plugin"
 )
 
 // Create a logger
@@ -69,7 +69,7 @@ if err == nil {
 ### Context Sharing
 
 ```go
-import "github.com/vampirenirmal/orchestrator/pkg/plugin"
+import "github.com/dotcommander/orc/pkg/plugin"
 
 // Create a context manager
 contextManager := plugin.NewContextManager()

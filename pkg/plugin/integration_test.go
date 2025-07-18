@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // TestPhaseIntegration tests the complete integration between event bus and phase execution

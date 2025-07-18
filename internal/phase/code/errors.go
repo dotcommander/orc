@@ -1,7 +1,7 @@
 package code
 
 import (
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // Re-export centralized error types for backward compatibility

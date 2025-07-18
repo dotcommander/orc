@@ -16,7 +16,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/vampirenirmal/orchestrator.git
+git clone https://github.com/dotcommander/orc.git
 cd orc
 
 # Install dependencies
@@ -195,7 +195,7 @@ import (
     "context"
     "time"
     
-    "github.com/vampirenirmal/orchestrator/internal/core"
+    "github.com/dotcommander/orc/internal/core"
 )
 
 type NewPhase struct {
@@ -255,7 +255,7 @@ import (
     "testing"
     
     "github.com/stretchr/testify/assert"
-    "github.com/vampirenirmal/orchestrator/internal/core"
+    "github.com/dotcommander/orc/internal/core"
 )
 
 func TestNewPhaseExecute(t *testing.T) {
@@ -336,7 +336,7 @@ func (c *Config) validate() error {
 ### 1. Debug Logging
 ```bash
 # Enable debug logging
-export REFINER_LOG_LEVEL=debug
+export ORC_LOG_LEVEL=debug
 
 # Run with verbose output
 orc -verbose "test prompt"
@@ -388,7 +388,7 @@ Go version X.X.X is too old. Minimum required: 1.21
 **Error Message:**
 ```
 package "github.com/go-playground/validator/v10" is not in GOROOT
-module github.com/vampirenirmal/orchestrator: invalid version: unknown revision
+module github.com/dotcommander/orc: invalid version: unknown revision
 ```
 
 **Solution:**

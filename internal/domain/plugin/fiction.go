@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/agent"
-	"github.com/vampirenirmal/orchestrator/internal/core"
-	"github.com/vampirenirmal/orchestrator/internal/domain"
-	"github.com/vampirenirmal/orchestrator/internal/phase/fiction"
+	"github.com/dotcommander/orc/internal/agent"
+	"github.com/dotcommander/orc/internal/core"
+	"github.com/dotcommander/orc/internal/domain"
+	"github.com/dotcommander/orc/internal/phase/fiction"
 )
 
 // FictionPlugin implements the DomainPlugin interface for fiction generation

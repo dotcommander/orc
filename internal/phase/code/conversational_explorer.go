@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
-	"github.com/vampirenirmal/orchestrator/internal/phase"
+	"github.com/dotcommander/orc/internal/core"
+	"github.com/dotcommander/orc/internal/phase"
 )
 
 // ConversationalExplorer conducts natural dialogue to understand project requirements

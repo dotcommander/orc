@@ -10,7 +10,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/domain"
+	"github.com/dotcommander/orc/internal/domain"
 )
 
 // CircuitBreakerState represents the current state of a circuit breaker

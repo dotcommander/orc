@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	
-	"github.com/vampirenirmal/orchestrator/internal/domain"
-	domainPlugin "github.com/vampirenirmal/orchestrator/internal/domain/plugin"
+	"github.com/dotcommander/orc/internal/domain"
+	domainPlugin "github.com/dotcommander/orc/internal/domain/plugin"
 )
 
 // ContextAwarePluginRunner extends the domain plugin runner with context sharing

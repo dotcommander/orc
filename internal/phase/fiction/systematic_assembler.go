@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // SystematicAssembler creates the final polished novel from editorial output

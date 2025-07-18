@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/domain"
-	domainPlugin "github.com/vampirenirmal/orchestrator/internal/domain/plugin"
+	"github.com/dotcommander/orc/internal/domain"
+	domainPlugin "github.com/dotcommander/orc/internal/domain/plugin"
 )
 
 // Loader loads and manages plugins

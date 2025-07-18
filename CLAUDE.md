@@ -2,8 +2,8 @@
 
 **Project**: The Orchestrator - AI Novel Generation Orchestrator  
 **Location**: `/Users/vampire/go/src/orchestrator`  
-**Repository**: `github.com/vampirenirmal/orchestrator`  
-**Go Module**: `github.com/vampirenirmal/orchestrator`  
+**Repository**: `github.com/dotcommander/orc`  
+**Go Module**: `github.com/dotcommander/orc`  
 **Architecture**: Clean Architecture with Phase-based Orchestration  
 
 ## Quick Context for AI Assistants
@@ -116,7 +116,7 @@ All dependencies wired in `cmd/orchestrator/main.go`:
 - `OPENAI_API_KEY` - OpenAI API key (required for gpt-4.1 model)
 - `XDG_CONFIG_HOME` - Override config directory
 - `XDG_DATA_HOME` - Override data directory
-- `REFINER_CONFIG` - Override config file path
+- `ORC_CONFIG` - Override config file path
 
 ### **CRITICAL MODEL SPECIFICATION RULE**
 - **NEVER question, correct, or override user-specified model names**

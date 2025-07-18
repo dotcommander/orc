@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // ValidationLevel defines the strictness of validation

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // FlowingAssembler creates cohesive manuscripts through natural composition

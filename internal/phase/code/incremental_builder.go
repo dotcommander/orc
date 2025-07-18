@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
-	"github.com/vampirenirmal/orchestrator/internal/phase"
+	"github.com/dotcommander/orc/internal/core"
+	"github.com/dotcommander/orc/internal/phase"
 )
 
 // IncrementalBuilder builds code incrementally like our fiction writer builds scenes

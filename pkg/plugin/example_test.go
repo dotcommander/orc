@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/domain/plugin"
-	pkgPlugin "github.com/vampirenirmal/orchestrator/pkg/plugin"
+	"github.com/dotcommander/orc/internal/domain/plugin"
+	pkgPlugin "github.com/dotcommander/orc/pkg/plugin"
 )
 
 func ExampleDiscoverer() {

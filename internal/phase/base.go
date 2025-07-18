@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // BasePhase provides common functionality for all phases

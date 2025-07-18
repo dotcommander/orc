@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // FictionValidator provides fiction-specific validation

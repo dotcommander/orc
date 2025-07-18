@@ -7,7 +7,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // EventAwarePhase wraps a regular phase with event bus integration

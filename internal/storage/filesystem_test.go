@@ -9,7 +9,7 @@ import (
 
 func TestFileSystemSecurity(t *testing.T) {
 	// Create a temporary directory for testing
-	tempDir, err := os.MkdirTemp("", "refiner-test")
+	tempDir, err := os.MkdirTemp("", "orc-test")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -109,7 +109,7 @@ func TestFileSystemSecurity(t *testing.T) {
 }
 
 func TestSanitizePath(t *testing.T) {
-	tempDir, err := os.MkdirTemp("", "refiner-test")
+	tempDir, err := os.MkdirTemp("", "orc-test")
 	if err != nil {
 		t.Fatal(err)
 	}

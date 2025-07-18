@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/domain"
+	"github.com/dotcommander/orc/internal/domain"
 )
 
 // DomainPlugin represents a domain-specific plugin

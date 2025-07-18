@@ -12,7 +12,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/vampirenirmal/orchestrator/internal/domain"
+	"github.com/dotcommander/orc/internal/domain"
 )
 
 // Capability represents a permission that a plugin can request

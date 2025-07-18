@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
+	"github.com/dotcommander/orc/internal/core"
 )
 
 // Example: Complete Integration Demonstration

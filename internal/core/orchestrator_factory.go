@@ -3,7 +3,7 @@ package core
 import (
 	"log/slog"
 
-	"github.com/vampirenirmal/orchestrator/internal/config"
+	"github.com/dotcommander/orc/internal/config"
 )
 
 // OrchestratorFactory creates the appropriate orchestrator based on configuration

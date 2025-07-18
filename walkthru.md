@@ -31,7 +31,7 @@ The "create" command handler:
 
 ### Configuration Loading
 The system loads configuration in this order:
-1. Checks for environment variable REFINER_CONFIG
+1. Checks for environment variable ORC_CONFIG
 2. If not set, looks in ~/.config/orchestrator/config.yaml
 3. Falls back to default configuration if file doesn't exist
 4. Validates all configuration values

@@ -489,9 +489,9 @@ import (
     "gopkg.in/yaml.v3"
     
     // Local packages (relative to module root)
-    "github.com/vampirenirmal/orchestrator/internal/agent"
-    "github.com/vampirenirmal/orchestrator/internal/config"
-    "github.com/vampirenirmal/orchestrator/internal/storage"
+    "github.com/dotcommander/orc/internal/agent"
+    "github.com/dotcommander/orc/internal/config"
+    "github.com/dotcommander/orc/internal/storage"
 )
 ```
 

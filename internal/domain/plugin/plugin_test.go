@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/agent"
-	"github.com/vampirenirmal/orchestrator/internal/domain"
-	"github.com/vampirenirmal/orchestrator/internal/domain/plugin"
+	"github.com/dotcommander/orc/internal/agent"
+	"github.com/dotcommander/orc/internal/domain"
+	"github.com/dotcommander/orc/internal/domain/plugin"
 )
 
 // Mock domain agent for testing

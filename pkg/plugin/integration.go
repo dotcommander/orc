@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	
-	"github.com/vampirenirmal/orchestrator/internal/domain"
+	"github.com/dotcommander/orc/internal/domain"
 )
 
 // ContextAwarePhase wraps a domain.Phase to provide context sharing capabilities

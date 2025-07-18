@@ -1,4 +1,4 @@
-module github.com/vampirenirmal/orchestrator
+module github.com/dotcommander/orc
 
 go 1.21
 

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/pkg/plugin"
+	"github.com/dotcommander/orc/pkg/plugin"
 )
 
 func TestHealthMonitor(t *testing.T) {

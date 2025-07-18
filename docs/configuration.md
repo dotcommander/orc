@@ -13,7 +13,7 @@ The Orchestrator follows the **XDG Base Directory Specification** for configurat
 Configuration values are resolved in the following order (highest to lowest priority):
 
 1. **Command-line flags** (`-config`, `-output`, `-verbose`)
-2. **Environment variables** (`OPENAI_API_KEY`, `REFINER_CONFIG`)
+2. **Environment variables** (`OPENAI_API_KEY`, `ORC_CONFIG`)
 3. **XDG config file** (`~/.config/orchestrator/config.yaml`)
 4. **Built-in defaults**
 
@@ -142,9 +142,9 @@ XDG_DATA_HOME=/custom/data/path
 XDG_STATE_HOME=/custom/state/path
 
 # The Orchestrator-specific overrides
-REFINER_CONFIG=/path/to/custom/config.yaml
-REFINER_OUTPUT_DIR=/path/to/custom/output
-REFINER_LOG_LEVEL=debug
+ORC_CONFIG=/path/to/custom/config.yaml
+ORC_OUTPUT_DIR=/path/to/custom/output
+ORC_LOG_LEVEL=debug
 ```
 
 ## Configuration Sections
@@ -254,7 +254,7 @@ orc -config custom.yaml -output ./novels -verbose "write a fantasy novel"
 export OPENAI_API_KEY="your-key-here"
 
 # Override default config path
-export REFINER_CONFIG="/path/to/custom/config.yaml"
+export ORC_CONFIG="/path/to/custom/config.yaml"
 
 # Set XDG directories
 export XDG_CONFIG_HOME="/custom/config"

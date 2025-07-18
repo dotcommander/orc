@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/config"
+	"github.com/dotcommander/orc/internal/config"
 )
 
 // The Orchestrator interface is already defined in orchestrator.go

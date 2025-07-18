@@ -7,8 +7,8 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
-	"github.com/vampirenirmal/orchestrator/internal/phase"
+	"github.com/dotcommander/orc/internal/core"
+	"github.com/dotcommander/orc/internal/phase"
 )
 
 type Critic struct {

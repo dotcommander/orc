@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/vampirenirmal/orchestrator/internal/core"
-	"github.com/vampirenirmal/orchestrator/internal/phase"
+	"github.com/dotcommander/orc/internal/core"
+	"github.com/dotcommander/orc/internal/phase"
 )
 
 // ResilientWriter implements a writer phase with enhanced timeout handling and resume capabilities
