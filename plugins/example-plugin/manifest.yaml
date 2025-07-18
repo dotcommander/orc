@@ -1,0 +1,44 @@
+name: example
+version: 1.0.0
+description: Example plugin demonstrating Orc plugin development
+author: Orc Community
+license: MIT
+homepage: https://github.com/dotcommander/orc
+
+type: external
+min_orc_version: 0.1.0
+language: go
+
+domains:
+  - example
+  - demo
+
+phases:
+  - name: Analysis
+    description: Analyzes the user request
+    order: 1
+    timeout: 30s
+    required: true
+    
+  - name: Generation
+    description: Generates simple output
+    order: 2
+    timeout: 1m
+    required: true
+
+output_spec:
+  primary_output: output.txt
+  secondary_outputs:
+    - summary.md
+    - metadata.json
+
+config_schema:
+  type: object
+  properties:
+    verbose:
+      type: boolean
+      default: false
+      description: Enable verbose output
+
+default_config:
+  verbose: false
