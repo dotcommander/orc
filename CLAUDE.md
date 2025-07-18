@@ -69,7 +69,7 @@ orc/
 - ✅ **Model Specification**: User model choices (gpt-4.1) never overridden
 - ✅ **XDG Compliance**: Follows XDG Base Directory Specification
 - ✅ **Proven Code Generation**: Successfully generates PHP, React, Go applications
-- ✅ **Enhanced V2 Prompts**: Professional-grade prompts following Anthropic 2025 best practices
+- ✅ **Enhanced Prompts**: Professional-grade prompts following Anthropic 2025 best practices
 
 ### Key Implementation Patterns
 
@@ -185,12 +185,9 @@ make build && make test
 # Install locally (XDG compliant)
 make install
 
-# Standard content generation with enhanced V2 prompts (default)
+# Content generation with enhanced prompts
 ./orc create fiction "Write a sci-fi thriller about AI consciousness"
 ./orc create code "Create a REST API in Go with authentication"
-
-# Use legacy prompts if needed
-./orc create fiction "Write a story" --legacy-prompts
 
 # Quality-focused generation (recommended)
 ./orc create code "ONLY USE PHP. Create hello.php that echoes Hello World" --fluid --verbose

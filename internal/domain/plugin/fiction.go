@@ -1,12 +1,14 @@
 package plugin
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
 
+	"github.com/vampirenirmal/orchestrator/internal/agent"
 	"github.com/vampirenirmal/orchestrator/internal/core"
 	"github.com/vampirenirmal/orchestrator/internal/domain"
 	"github.com/vampirenirmal/orchestrator/internal/phase/fiction"
@@ -19,14 +21,19 @@ type FictionPlugin struct {
 	config        DomainPluginConfig
 	checkpointMgr domain.CheckpointManager
 	sessionID     string
+	agentFactory  *agent.AgentFactory
 }
 
-// NewFictionPlugin creates a new fiction plugin adapter
-func NewFictionPlugin(agent domain.Agent, storage domain.Storage) *FictionPlugin {
+// NewFictionPlugin creates a new fiction plugin with enhanced prompts
+func NewFictionPlugin(domainAgent domain.Agent, storage domain.Storage, promptsDir string, aiClient agent.AIClient) *FictionPlugin {
+	// Create agent factory
+	factory := agent.NewAgentFactory(aiClient, promptsDir)
+	
 	return &FictionPlugin{
-		agent:   agent,
-		storage: storage,
-		config:  getDefaultFictionConfig(),
+		agent:        domainAgent,
+		storage:      storage,
+		config:       getDefaultFictionConfig(),
+		agentFactory: factory,
 	}
 }
 
@@ -44,30 +51,32 @@ func (p *FictionPlugin) Name() string {
 
 // Description returns a human-readable description
 func (p *FictionPlugin) Description() string {
-	return "Systematic AI novel generation with word-count accuracy: strategic planning, targeted writing, contextual editing, and polished assembly"
+	return "Professional AI novel generation with enhanced prompts: strategic planning, targeted writing, contextual editing, and polished assembly"
 }
 
-// GetPhases returns the ordered phases for fiction generation
+// GetPhases returns enhanced phases with professional prompts
 func (p *FictionPlugin) GetPhases() []domain.Phase {
-	// Convert agent and storage to core interfaces for phase creation
-	coreAgent := &domainToCoreAgentAdapter{agent: p.agent}
-	coreStorage := &domainToCoreStorageAdapter{storage: p.storage}
-	
-	// Create core phases using systematic approach for reliable word counts
-	corePhases := []core.Phase{
-		fiction.NewSystematicPlanner(coreAgent, coreStorage),
-		fiction.NewTargetedWriter(coreAgent, coreStorage),
-		fiction.NewContextualEditor(coreAgent, coreStorage),
-		fiction.NewSystematicAssembler(coreStorage),
+	// Create enhanced phases that use the agent factory
+	enhancedPhases := []domain.Phase{
+		&enhancedPlannerPhase{
+			factory: p.agentFactory,
+			storage: p.storage,
+		},
+		&enhancedWriterPhase{
+			factory: p.agentFactory,
+			storage: p.storage,
+		},
+		&enhancedEditorPhase{
+			factory: p.agentFactory,
+			storage: p.storage,
+		},
+		// Assembler doesn't need AI, so use the standard one
+		&coreToDomainPhaseAdapter{
+			phase: fiction.NewSystematicAssembler(&domainToCoreStorageAdapter{storage: p.storage}),
+		},
 	}
 	
-	// Convert core phases to domain phases
-	domainPhases := make([]domain.Phase, len(corePhases))
-	for i, corePhase := range corePhases {
-		domainPhases[i] = &coreToDomainPhaseAdapter{phase: corePhase}
-	}
-	
-	return domainPhases
+	return enhancedPhases
 }
 
 // GetDefaultConfig returns default configuration for fiction generation
@@ -230,19 +239,20 @@ func (v *FictionValidator) ValidatePhaseTransition(from, to string, data interfa
 func getDefaultFictionConfig() DomainPluginConfig {
 	return DomainPluginConfig{
 		Prompts: map[string]string{
-			"planning":     filepath.Join(getPromptsDir(), "planner.txt"),
+			"planning":     filepath.Join(getPromptsDir(), "orchestrator.txt"),
 			"architecture": filepath.Join(getPromptsDir(), "architect.txt"),
 			"writing":      filepath.Join(getPromptsDir(), "writer.txt"),
 			"critique":     filepath.Join(getPromptsDir(), "critic.txt"),
+			"editor":       filepath.Join(getPromptsDir(), "editor.txt"),
 		},
 		Limits: DomainPluginLimits{
 			MaxConcurrentPhases: 4,
 			PhaseTimeouts: map[string]time.Duration{
-				"planning":     5 * time.Minute,
+				"planning":     20 * time.Minute,
 				"architecture": 10 * time.Minute,
 				"writing":      30 * time.Minute,
+				"editing":      15 * time.Minute,
 				"assembly":     2 * time.Minute,
-				"critique":     5 * time.Minute,
 			},
 			MaxRetries:   3,
 			TotalTimeout: 60 * time.Minute,
@@ -252,6 +262,7 @@ func getDefaultFictionConfig() DomainPluginConfig {
 			"supports_streaming":  false,
 			"requires_creativity": true,
 			"output_format":       "markdown",
+			"uses_enhanced_prompts": true,
 		},
 	}
 }
@@ -263,4 +274,199 @@ func getPromptsDir() string {
 	}
 	home, _ := os.UserHomeDir()
 	return filepath.Join(home, ".local", "share", "orchestrator", "prompts")
+}
+
+// Enhanced phase implementations
+type enhancedPlannerPhase struct {
+	factory *agent.AgentFactory
+	storage domain.Storage
+}
+
+func (p *enhancedPlannerPhase) Name() string {
+	return "Strategic Planning"
+}
+
+func (p *enhancedPlannerPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// Create enhanced planning agent
+	plannerAgent := p.factory.CreateFictionAgent("planning")
+	
+	// Convert to core agent adapter
+	coreAgent := &agentToCoreAdapter{agent: plannerAgent}
+	coreStorage := &domainToCoreStorageAdapter{storage: p.storage}
+	
+	// Use the systematic planner with enhanced agent
+	planner := fiction.NewSystematicPlanner(coreAgent, coreStorage)
+	
+	// Convert input and execute
+	coreInput := core.PhaseInput{
+		Request:   input.Request,
+		SessionID: getSessionID(input.Metadata),
+	}
+	
+	coreOutput, err := planner.Execute(ctx, coreInput)
+	if err != nil {
+		return domain.PhaseOutput{Error: err}, err
+	}
+	
+	return domain.PhaseOutput{
+		Data:     coreOutput.Data,
+		Metadata: input.Metadata,
+	}, nil
+}
+
+func (p *enhancedPlannerPhase) ValidateInput(ctx context.Context, input domain.PhaseInput) error {
+	if strings.TrimSpace(input.Request) == "" {
+		return fmt.Errorf("request cannot be empty")
+	}
+	return nil
+}
+
+func (p *enhancedPlannerPhase) ValidateOutput(ctx context.Context, output domain.PhaseOutput) error {
+	return nil
+}
+
+func (p *enhancedPlannerPhase) EstimatedDuration() time.Duration {
+	return 20 * time.Minute
+}
+
+func (p *enhancedPlannerPhase) CanRetry(err error) bool {
+	return true
+}
+
+// Enhanced writer phase
+type enhancedWriterPhase struct {
+	factory *agent.AgentFactory
+	storage domain.Storage
+}
+
+func (p *enhancedWriterPhase) Name() string {
+	return "Targeted Writing"
+}
+
+func (p *enhancedWriterPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// Create enhanced writing agent
+	writerAgent := p.factory.CreateFictionAgent("writer")
+	
+	// Convert to core agent adapter
+	coreAgent := &agentToCoreAdapter{agent: writerAgent}
+	coreStorage := &domainToCoreStorageAdapter{storage: p.storage}
+	
+	// Use the targeted writer with enhanced agent
+	writer := fiction.NewTargetedWriter(coreAgent, coreStorage)
+	
+	// Convert input and execute
+	coreInput := core.PhaseInput{
+		Data:      input.Data,
+		SessionID: getSessionID(input.Metadata),
+	}
+	
+	coreOutput, err := writer.Execute(ctx, coreInput)
+	if err != nil {
+		return domain.PhaseOutput{Error: err}, err
+	}
+	
+	return domain.PhaseOutput{
+		Data:     coreOutput.Data,
+		Metadata: input.Metadata,
+	}, nil
+}
+
+func (p *enhancedWriterPhase) ValidateInput(ctx context.Context, input domain.PhaseInput) error {
+	if input.Data == nil {
+		return fmt.Errorf("writer requires plan data")
+	}
+	return nil
+}
+
+func (p *enhancedWriterPhase) ValidateOutput(ctx context.Context, output domain.PhaseOutput) error {
+	return nil
+}
+
+func (p *enhancedWriterPhase) EstimatedDuration() time.Duration {
+	return 30 * time.Minute
+}
+
+func (p *enhancedWriterPhase) CanRetry(err error) bool {
+	return true
+}
+
+// Enhanced editor phase
+type enhancedEditorPhase struct {
+	factory *agent.AgentFactory
+	storage domain.Storage
+}
+
+func (p *enhancedEditorPhase) Name() string {
+	return "Contextual Editing"
+}
+
+func (p *enhancedEditorPhase) Execute(ctx context.Context, input domain.PhaseInput) (domain.PhaseOutput, error) {
+	// Create enhanced editing agent
+	editorAgent := p.factory.CreateFictionAgent("editor")
+	
+	// Convert to core agent adapter
+	coreAgent := &agentToCoreAdapter{agent: editorAgent}
+	coreStorage := &domainToCoreStorageAdapter{storage: p.storage}
+	
+	// Use the contextual editor with enhanced agent
+	editor := fiction.NewContextualEditor(coreAgent, coreStorage)
+	
+	// Convert input and execute
+	coreInput := core.PhaseInput{
+		Data:      input.Data,
+		SessionID: getSessionID(input.Metadata),
+	}
+	
+	coreOutput, err := editor.Execute(ctx, coreInput)
+	if err != nil {
+		return domain.PhaseOutput{Error: err}, err
+	}
+	
+	return domain.PhaseOutput{
+		Data:     coreOutput.Data,
+		Metadata: input.Metadata,
+	}, nil
+}
+
+func (p *enhancedEditorPhase) ValidateInput(ctx context.Context, input domain.PhaseInput) error {
+	if input.Data == nil {
+		return fmt.Errorf("editor requires written content")
+	}
+	return nil
+}
+
+func (p *enhancedEditorPhase) ValidateOutput(ctx context.Context, output domain.PhaseOutput) error {
+	return nil
+}
+
+func (p *enhancedEditorPhase) EstimatedDuration() time.Duration {
+	return 15 * time.Minute
+}
+
+func (p *enhancedEditorPhase) CanRetry(err error) bool {
+	return true
+}
+
+// Adapter to convert agent.Agent to core.Agent
+type agentToCoreAdapter struct {
+	agent *agent.Agent
+}
+
+func (a *agentToCoreAdapter) Execute(ctx context.Context, prompt string, input interface{}) (string, error) {
+	return a.agent.Execute(ctx, prompt, input)
+}
+
+func (a *agentToCoreAdapter) ExecuteJSON(ctx context.Context, prompt string, input interface{}) (string, error) {
+	return a.agent.ExecuteJSON(ctx, prompt, input)
+}
+
+// Helper to extract session ID from metadata
+func getSessionID(metadata map[string]interface{}) string {
+	if metadata == nil {
+		return ""
+	}
+	if sessionID, ok := metadata["session_id"].(string); ok {
+		return sessionID
+	}
+	return ""
 }

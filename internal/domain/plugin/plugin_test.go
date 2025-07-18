@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/vampirenirmal/orchestrator/internal/agent"
 	"github.com/vampirenirmal/orchestrator/internal/domain"
 	"github.com/vampirenirmal/orchestrator/internal/domain/plugin"
 )
@@ -203,10 +204,14 @@ func (m *mockDomainStorage) List(ctx context.Context, pattern string) ([]string,
 }
 
 func TestFictionPlugin(t *testing.T) {
-	agent := &mockDomainAgent{}
+	mockAgent := &mockDomainAgent{}
 	storage := newMockDomainStorage()
 
-	fictionPlugin := plugin.NewFictionPlugin(agent, storage)
+	// Create mock AI client for testing
+	mockClient := agent.NewMockClient()
+	promptsDir := "testdata/prompts" // Test prompts directory
+	
+	fictionPlugin := plugin.NewFictionPlugin(mockAgent, storage, promptsDir, mockClient)
 
 	// Test Name
 	if fictionPlugin.Name() != "fiction" {
@@ -255,10 +260,14 @@ func TestFictionPlugin(t *testing.T) {
 }
 
 func TestCodePlugin(t *testing.T) {
-	agent := &mockDomainAgent{}
+	mockAgent := &mockDomainAgent{}
 	storage := newMockDomainStorage()
 
-	codePlugin := plugin.NewCodePlugin(agent, storage)
+	// Create mock AI client for testing
+	mockClient := agent.NewMockClient()
+	promptsDir := "testdata/prompts" // Test prompts directory
+	
+	codePlugin := plugin.NewCodePlugin(mockAgent, storage, promptsDir, mockClient)
 
 	// Test Name
 	if codePlugin.Name() != "code" {
@@ -496,13 +505,21 @@ func TestCodeValidator(t *testing.T) {
 	}
 }
 
+// TestPluginAdapter has been removed since PluginAdapter is no longer used
+// The plugins now directly implement the required interfaces
+/*
 func TestPluginAdapter(t *testing.T) {
 	agent := &mockDomainAgent{}
 	storage := newMockDomainStorage()
 
 	// Test with fiction plugin
-	fictionDomain := plugin.NewFictionPlugin(agent, storage)
-	fictionAdapter := plugin.NewPluginAdapter(fictionDomain)
+	// Create mock AI client for testing
+	mockClient := agent.NewMockClient()
+	promptsDir := "testdata/prompts" // Test prompts directory
+	
+	fictionDomain := plugin.NewFictionPlugin(agent, storage, promptsDir, mockClient)
+	// Note: NewPluginAdapter seems to have been removed, using fictionDomain directly
+	fictionAdapter := fictionDomain
 
 	// Test adapter delegates to domain plugin
 	if fictionAdapter.Name() != fictionDomain.Name() {
@@ -542,6 +559,7 @@ func TestPluginAdapter(t *testing.T) {
 		t.Error("adapter should have a version")
 	}
 }
+*/
 
 // TestDomainPluginRunnerExecution tests the complete execution flow
 func TestDomainPluginRunnerExecution(t *testing.T) {

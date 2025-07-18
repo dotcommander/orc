@@ -1,8 +1,8 @@
-# Enhanced Prompts System (V2)
+# Enhanced Prompts System (V2) - Default
 
 ## Overview
 
-The Orchestrator now supports enhanced V2 prompts that follow Anthropic's 2025 prompt engineering best practices. These prompts deliver significantly better quality outputs through sophisticated prompt engineering techniques.
+The Orchestrator uses enhanced V2 prompts that follow Anthropic's 2025 prompt engineering best practices. These are now the default and only prompts used by the system, delivering consistently high-quality outputs through sophisticated prompt engineering techniques.
 
 ## Key Improvements
 
@@ -46,36 +46,36 @@ Each prompt demonstrates deep domain knowledge:
 
 ## Usage
 
-### Enable Enhanced Prompts (Default)
-```bash
-./orc create fiction "Write a thriller about AI consciousness"
-./orc create code "Build a secure authentication system"
-```
+All commands automatically use the enhanced V2 prompts:
 
-### Use Legacy Prompts
 ```bash
-./orc create fiction "Write a story" --legacy-prompts
-./orc create code "Create an API" --legacy-prompts
+# Fiction generation
+./orc create fiction "Write a thriller about AI consciousness"
+./orc create fiction "Create a mystery novel set in Victorian London"
+
+# Code generation
+./orc create code "Build a secure authentication system"
+./orc create code "Create a REST API with JWT authentication"
 ```
 
 ## Implementation Details
 
 ### AgentFactory Pattern
-The system uses an `AgentFactory` to manage prompt versions:
+The system uses an `AgentFactory` to create agents with V2 prompts:
 ```go
-factory := agent.NewAgentFactory(client, promptsDir, useV2)
+factory := agent.NewAgentFactory(client, promptsDir)
 agent := factory.CreateFictionAgent("planning")
 ```
 
-### Enhanced Plugins
-- `EnhancedFictionPlugin` - Uses V2 prompts for all fiction phases
-- `EnhancedCodePlugin` - Uses V2 prompts for all code phases
+### Standard Plugins
+- `FictionPlugin` - Uses V2 prompts for all fiction phases
+- `CodePlugin` - Uses V2 prompts for all code phases
 
-### Backward Compatibility
-The system maintains full backward compatibility:
-- Default: Enhanced V2 prompts
-- `--legacy-prompts` flag: Original prompts
-- No changes to existing workflows
+### Quality-First Architecture
+The system is built around quality:
+- All agents use enhanced V2 prompts
+- Professional-grade outputs
+- Consistent high quality across all domains
 
 ## Quality Improvements Observed
 
@@ -115,17 +115,18 @@ prompts/
 
 ## Best Practices
 
-### When to Use Enhanced Prompts
-- Production content generation
-- Complex creative projects
-- Professional code development
-- Quality-critical outputs
+### Quality-First Development
+The enhanced V2 prompts ensure:
+- Production-ready content generation
+- Professional handling of complex projects
+- Enterprise-grade code development
+- Consistently high-quality outputs
 
-### When to Use Legacy Prompts
-- Quick prototypes
-- Backward compatibility testing
-- Simpler requirements
-- Performance testing
+### Prompt Engineering Excellence
+- Clear XML structure for organization
+- Multi-shot examples for context
+- Chain-of-thought reasoning
+- Domain-specific expertise
 
 ## Future Enhancements
 
@@ -137,4 +138,4 @@ prompts/
 
 ## Conclusion
 
-The enhanced prompts system represents a significant leap in AI-driven content generation quality. By following Anthropic's best practices and implementing sophisticated prompt engineering techniques, the Orchestrator now produces outputs that meet professional standards across both creative and technical domains.
+The enhanced prompts system is the cornerstone of the Orchestrator's quality-first approach. By following Anthropic's best practices and implementing sophisticated prompt engineering techniques, the Orchestrator consistently produces outputs that meet professional standards across both creative and technical domains. This commitment to quality through advanced prompt engineering ensures that every generation delivers value.

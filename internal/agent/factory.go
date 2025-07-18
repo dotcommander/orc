@@ -2,34 +2,25 @@ package agent
 
 import (
 	"path/filepath"
-	"strings"
 )
 
 // AgentFactory creates agents with appropriate prompts based on context
 type AgentFactory struct {
-	client       AIClient
-	promptsDir   string
-	useV2Prompts bool
+	client     AIClient
+	promptsDir string
 }
 
 // NewAgentFactory creates a new agent factory
-func NewAgentFactory(client AIClient, promptsDir string, useV2Prompts bool) *AgentFactory {
+func NewAgentFactory(client AIClient, promptsDir string) *AgentFactory {
 	return &AgentFactory{
-		client:       client,
-		promptsDir:   promptsDir,
-		useV2Prompts: useV2Prompts,
+		client:     client,
+		promptsDir: promptsDir,
 	}
 }
 
 // CreateFictionAgent creates an agent configured for fiction generation
 func (f *AgentFactory) CreateFictionAgent(phase string) *Agent {
-	if !f.useV2Prompts {
-		// Use legacy prompts
-		promptFile := f.getFictionPromptFile(phase)
-		return New(f.client, promptFile)
-	}
-
-	// Use enhanced v2 prompts with system prompts
+	// Use enhanced prompts with system prompts
 	switch phase {
 	case "planning", "orchestrator":
 		systemPrompt := `You are Elena Voss, a Senior Narrative Architect with 15 years of experience crafting bestselling commercial fiction. You've worked with major publishers and have an intimate understanding of what makes novels succeed in today's market.
@@ -44,7 +35,7 @@ Your expertise includes:
 
 You approach every project with both artistic vision and commercial awareness, ensuring stories are not only compelling but also marketable.`
 		
-		promptPath := filepath.Join(f.promptsDir, "orchestrator_v2.txt")
+		promptPath := filepath.Join(f.promptsDir, "orchestrator.txt")
 		return NewWithSystem(f.client, promptPath, systemPrompt)
 
 	case "writer", "natural_writer":
@@ -58,7 +49,7 @@ Your writing expertise includes:
 - Maintaining consistent tone and atmosphere
 - Understanding genre conventions while bringing fresh perspectives`
 		
-		promptPath := filepath.Join(f.promptsDir, "writer_v2.txt")
+		promptPath := filepath.Join(f.promptsDir, "writer.txt")
 		return NewWithSystem(f.client, promptPath, systemPrompt)
 
 	case "editor", "contextual_editor":
@@ -72,25 +63,26 @@ Your editing expertise includes:
 - Polishing prose while maintaining author voice
 - Ensuring commercial viability while preserving artistic vision`
 		
-		promptPath := filepath.Join(f.promptsDir, "editor_v2.txt")
+		promptPath := filepath.Join(f.promptsDir, "editor.txt")
 		return NewWithSystem(f.client, promptPath, systemPrompt)
 
+	case "architect":
+		promptPath := filepath.Join(f.promptsDir, "architect.txt")
+		return New(f.client, promptPath)
+
+	case "critic":
+		promptPath := filepath.Join(f.promptsDir, "critic.txt")
+		return New(f.client, promptPath)
+
 	default:
-		// Fall back to legacy prompts
-		promptFile := f.getFictionPromptFile(phase)
-		return New(f.client, promptFile)
+		// Default to orchestrator
+		return f.CreateFictionAgent("orchestrator")
 	}
 }
 
 // CreateCodeAgent creates an agent configured for code generation
 func (f *AgentFactory) CreateCodeAgent(phase string) *Agent {
-	if !f.useV2Prompts {
-		// Use legacy prompts
-		promptFile := f.getCodePromptFile(phase)
-		return New(f.client, promptFile)
-	}
-
-	// Use enhanced v2 prompts with system prompts
+	// Use enhanced prompts with system prompts
 	switch phase {
 	case "planner", "code_planner":
 		systemPrompt := `You are Marcus Chen, a Senior Software Architect with 12 years of experience in enterprise software development. You specialize in creating robust, maintainable, and secure applications across multiple technology stacks.
@@ -106,7 +98,7 @@ Your expertise includes:
 
 You approach every project with a focus on long-term maintainability, security, and team collaboration.`
 		
-		promptPath := filepath.Join(f.promptsDir, "code_planner_v2.txt")
+		promptPath := filepath.Join(f.promptsDir, "code_planner.txt")
 		return NewWithSystem(f.client, promptPath, systemPrompt)
 
 	case "analyzer", "code_analyzer":
@@ -121,7 +113,7 @@ Your analysis expertise includes:
 - Team workflow and development process evaluation
 - Providing actionable improvement recommendations`
 		
-		promptPath := filepath.Join(f.promptsDir, "code_analyzer_v2.txt")
+		promptPath := filepath.Join(f.promptsDir, "code_analyzer.txt")
 		return NewWithSystem(f.client, promptPath, systemPrompt)
 
 	case "implementer", "code_implementer":
@@ -136,46 +128,16 @@ Your implementation expertise includes:
 - Clear code documentation and comments
 - Test-first development approach`
 		
-		promptPath := filepath.Join(f.promptsDir, "code_implementer_v2.txt")
+		promptPath := filepath.Join(f.promptsDir, "code_implementer.txt")
 		return NewWithSystem(f.client, promptPath, systemPrompt)
 
+	case "reviewer", "code_reviewer":
+		promptPath := filepath.Join(f.promptsDir, "code_reviewer.txt")
+		return New(f.client, promptPath)
+
 	default:
-		// Fall back to legacy prompts
-		promptFile := f.getCodePromptFile(phase)
-		return New(f.client, promptFile)
+		// Default to planner
+		return f.CreateCodeAgent("planner")
 	}
 }
 
-// getFictionPromptFile returns the prompt file path for a fiction phase
-func (f *AgentFactory) getFictionPromptFile(phase string) string {
-	phase = strings.ToLower(phase)
-	switch phase {
-	case "planning", "orchestrator":
-		return filepath.Join(f.promptsDir, "orchestrator.txt")
-	case "architect":
-		return filepath.Join(f.promptsDir, "architect.txt")
-	case "writer", "natural_writer":
-		return filepath.Join(f.promptsDir, "writer.txt")
-	case "critic", "editor":
-		return filepath.Join(f.promptsDir, "critic.txt")
-	default:
-		return ""
-	}
-}
-
-// getCodePromptFile returns the prompt file path for a code phase
-func (f *AgentFactory) getCodePromptFile(phase string) string {
-	phase = strings.ToLower(phase)
-	switch phase {
-	case "analyzer":
-		return filepath.Join(f.promptsDir, "code_analyzer.txt")
-	case "planner":
-		return filepath.Join(f.promptsDir, "code_planner.txt")
-	case "implementer":
-		return filepath.Join(f.promptsDir, "code_implementer.txt")
-	case "reviewer":
-		return filepath.Join(f.promptsDir, "code_reviewer.txt")
-	default:
-		return ""
-	}
-}

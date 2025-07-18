@@ -129,3 +129,15 @@ func (m *MockClient) CompleteJSON(ctx context.Context, prompt string) (string, e
 	
 	return response, nil
 }
+
+// CompleteWithSystem returns a mock response (ignores system prompt)
+func (m *MockClient) CompleteWithSystem(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
+	// For mock, we just use the user prompt
+	return m.Complete(ctx, userPrompt)
+}
+
+// CompleteJSONWithSystem returns a mock JSON response (ignores system prompt)
+func (m *MockClient) CompleteJSONWithSystem(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
+	// For mock, we just use the user prompt
+	return m.CompleteJSON(ctx, userPrompt)
+}
