@@ -37,7 +37,13 @@ Thumbs.db
 # Build artifacts
 /dist/
 /build/
+/bin/
+
 # Test output directories
 fiction_*/
 code_*/
 temp/
+/temp/
+
+# Development
+/issues/
