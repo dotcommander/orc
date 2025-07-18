@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 BINARY_NAME="orc"
-REPO_URL="https://github.com/vampirenirmal/orchestrator"
+REPO_URL="https://github.com/dotcommander/orc"
 
 # XDG directories
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
