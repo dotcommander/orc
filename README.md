@@ -1,242 +1,221 @@
-# The Orchestrator - Systematic AI Novel Generation
+# 🔮 The Orchestrator (Orc)
 
-**Revolutionary AI novel generation with predictable word counts and engineered quality.**
+<div align="center">
+  <img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go" alt="Go Version">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/AI-Powered-purple?style=for-the-badge" alt="AI Powered">
+</div>
 
-🎯 **Core Innovation**: **Word Budget Engineering** - Generate exactly 20,000 words through systematic mathematical planning, not hope.
+<div align="center">
+  <h3>⚔️ Forge Content with the Power of AI Orchestration ⚔️</h3>
+  <p><em>Like a master craftsman in the depths of Mordor, The Orchestrator forges powerful content through the fires of artificial intelligence</em></p>
+</div>
 
-✅ **Proven Results**: 100.5% word count accuracy (20,100/20,000 words) through systematic orchestration  
-🧠 **Context Intelligence**: AI editor reads entire novel before making improvements  
-⚡ **Reliable Process**: 95%+ success rate for target lengths through engineered structure  
+---
 
-## Systematic Architecture
+## 🌋 What is The Orchestrator?
 
-**The Breakthrough**: Instead of asking AI to "write a 20k word novel" and hoping for the best, we **engineer the exact structure** that MUST result in 20k words:
+The Orchestrator (affectionately called "Orc") is a powerful AI content generation system that commands multiple AI agents to create high-quality content through structured, iterative processes. Built with the robustness of Go and the intelligence of GPT-4, it transforms simple prompts into complete novels, production-ready code, and comprehensive documentation.
 
-```
-20,000 target words
-├── 20 chapters × 1,000 words each  
-│   ├── Chapter 1: 3 scenes × ~333 words each
-│   ├── Chapter 2: 3 scenes × ~333 words each
-│   └── ... (systematic breakdown)
-└── Total: 60 scenes with specific word targets
-```
+### ✨ Key Features
 
-**Result**: Predictable, high-quality novels with mathematical precision.
+- **🎭 Multi-Agent Orchestration** - Commands specialized AI personas working in harmony
+- **📚 Novel Generation** - Creates full-length fiction with consistent plot and characters
+- **💻 Code Generation** - Builds complete applications with best practices
+- **🔌 Plugin Architecture** - Extend with custom content generators
+- **🛡️ Enterprise-Grade** - Circuit breakers, health monitoring, and security controls
+- **🌊 Fluid Execution** - Adaptive orchestration that flows like water
 
-### Core Principles
-
-- **Word Budget Engineering** - Mathematical approach to predictable lengths
-- **Contextual Intelligence** - Each phase aware of complete novel context  
-- **Systematic Quality** - Three-pass editing with full story awareness
-- **AI-Friendly Design** - Works with AI's conversational strengths
-
-## Project Structure
-
-```
-orc/
-├── cmd/
-│   └── orc/
-│       └── main.go              # Application entry point
-├── internal/
-│   ├── orchestrator/           # Core orchestration logic
-│   │   ├── orchestrator.go     
-│   │   └── interfaces.go       # Phase, Agent, Storage interfaces
-│   ├── phases/                 # Individual phase implementations
-│   │   ├── planning/           # Novel planning phase
-│   │   ├── architecture/       # Character/setting development
-│   │   ├── writing/           # Scene writing with worker pool
-│   │   ├── assembly/          # Manuscript assembly
-│   │   └── critique/          # AI critique and feedback
-│   ├── agent/                 # AI agent abstraction
-│   │   ├── agent.go           
-│   │   ├── client.go          # HTTP client with retries
-│   │   └── interfaces.go      
-│   ├── config/                # Configuration management
-│   └── storage/               # Storage abstraction
-├── prompts/                   # AI prompt templates
-├── config.yaml               # Application configuration
-└── .env                      # Environment variables
-```
-
-## Installation
-
-### Quick Install (Recommended)
+## 🚀 Quick Start
 
 ```bash
-# Install from current directory
-./scripts/install.sh
+# Install The Orchestrator
+go install github.com/dotcommander/orc/cmd/orc@latest
 
-# Or install from a specific path
-./scripts/install.sh install /path/to/orchestrator
+# Set your OpenAI API key
+export OPENAI_API_KEY=your_key_here
+
+# Generate a novel
+orc create fiction "Write a sci-fi thriller about AI consciousness"
+
+# Generate code
+orc create code "Build a REST API for task management in Go"
+
+# List available plugins
+orc plugins
 ```
 
-### Manual Installation
+## 🏗️ Architecture
+
+The Orchestrator employs a sophisticated multi-phase architecture:
+
+```
+User Request → Conversational Exploration → Planning → Execution → Refinement → Assembly
+```
+
+Each phase is handled by specialized AI agents:
+- **🧙 Strategic Architects** - Plan the overall structure
+- **⚒️ Targeted Builders** - Create focused content
+- **🔍 Quality Inspectors** - Ensure excellence
+- **📜 Master Assemblers** - Weave everything together
+
+## 🔌 Plugin System
+
+Create your own content generators with our powerful plugin framework:
 
 ```bash
-# Build and install using Make
-make install
+# Create a new plugin scaffold
+orc-plugin create poetry fiction
 
-# Or build manually
+# Your plugin is ready for customization!
+cd orchestrator-poetry-plugin
 make build
-cp bin/orchestrator ~/.local/bin/
 ```
 
-### From Source
+### Plugin Features
+- **📦 Manifest-Based** - Declarative plugin configuration
+- **🔒 Capability Security** - Fine-grained permission control
+- **💪 Resilience Patterns** - Circuit breakers and retry logic
+- **📡 Event Bus** - Inter-plugin communication
+- **❤️ Health Monitoring** - Continuous status checks
 
+## 🎮 Usage Examples
+
+### Generate a Novel
 ```bash
-git clone https://github.com/vampirenirmal/orchestrator.git
-cd orc
-make install
+orc create fiction "A fantasy epic about a reluctant hero"
 ```
 
-## Setup
-
-1. **API Key**: Add your Anthropic API key to `~/.config/orchestrator/.env`:
-   ```bash
-   echo "OPENAI_API_KEY=your_anthropic_api_key_here" >> ~/.config/orchestrator/.env
-   ```
-
-2. **Configuration**: Customize `~/.config/orchestrator/config.yaml` if needed
-
-3. **Prompts**: Edit prompt templates in `~/.local/share/orchestrator/prompts/`
-
-4. **PATH**: Ensure `~/.local/bin` is in your PATH:
-   ```bash
-   export PATH="$HOME/.local/bin:$PATH"
-   ```
-
-## Usage
-
+### Build an Application
 ```bash
-# Show help
-orc -help
-
-# Show version
-orc -version
-
-# Start a new novel generation
-orc "Write a science fiction novel about time travel"
-
-# Resume from a checkpoint (if the process was interrupted)
-orc -resume <session-id> "Write a science fiction novel about time travel"
-
-# Override output directory
-orc -output ./my-novels "Write a mystery novel"
-
-# Enable verbose logging
-orc -verbose "Write a fantasy novel"
-
-# Use custom config file
-orc -config ./custom-config.yaml "Write a thriller"
+orc create code "Create a React dashboard with authentication"
 ```
 
-## Configuration
-
-The application follows the XDG Base Directory Specification:
-
-### File Locations
-- **Config**: `$XDG_CONFIG_HOME/orchestrator/` (default: `~/.config/orchestrator/`)
-- **Data**: `$XDG_DATA_HOME/orchestrator/` (default: `~/.local/share/orchestrator/`)
-- **Binary**: `$XDG_BIN_HOME/` (default: `~/.local/bin/`)
-
-### Configuration Priority
-1. Command-line flags (`-config`, `-output`, etc.)
-2. Environment variables (`REFINER_CONFIG`, `OPENAI_API_KEY`)
-3. XDG config file (`~/.config/orchestrator/config.yaml`)
-4. Built-in defaults
-
-### Environment Variables
-- `XDG_CONFIG_HOME` - Override config directory
-- `XDG_DATA_HOME` - Override data directory  
-- `REFINER_CONFIG` - Override config file path
-- `OPENAI_API_KEY` - Anthropic API key
-
-## Features
-
-- **Multi-phase orchestration**: Planning → Architecture → Writing → Assembly → Critique
-- **Concurrent writing**: Worker pool for parallel scene generation  
-- **Resilient API calls**: Automatic retry with exponential backoff and circuit breaker pattern
-- **Type-safe contracts**: Structured data passing between phases
-- **Storage abstraction**: Easy to swap between file system and other storage backends
-- **Comprehensive logging**: Structured logging with slog
-- **Error taxonomy**: Differentiated handling of retryable vs terminal errors
-- **Context propagation**: Proper timeout and cancellation support throughout the pipeline
-- **Checkpoint/Resume**: Save progress and resume from failures
-- **Response caching**: Cache AI responses to reduce API calls and costs
-- **Rate limiting**: Built-in rate limiting to respect API quotas
-- **Resource limits**: Configurable limits for concurrent operations and timeouts
-- **Phase validation**: Pre-flight checks before executing each phase
-- **Security hardening**: Path traversal protection, secure file permissions
-- **HTTP optimization**: Connection pooling for 30-40% performance improvement
-- **CLI enhancement**: Standard flags, help text, and usage examples
-
-## Security Improvements
-
-The orc codebase includes several security enhancements:
-
-1. **Path Traversal Protection**: All file operations validate paths to prevent directory traversal attacks
-2. **Secure File Permissions**: Configuration files are saved with restrictive permissions (0600)
-3. **Input Validation**: Command-line arguments and paths are validated
-4. **No Direct Command Execution**: No shell commands are executed from user input
-5. **API Key Protection**: Support for environment variables instead of config files
-
-## Development
-
-### Building from Source
-
+### Resume Previous Work
 ```bash
-# Install dependencies
-make deps
-
-# Run tests with coverage
-make test
-
-# Run linters
-make lint
-
-# Build binary
-make build
-
-# Build for all platforms
-make build-all
-
-# Run in development mode
-make dev
+orc resume abc123def
 ```
 
-### Project Structure
+### Configure Settings
+```bash
+orc config set ai.model gpt-4
+orc config set ai.temperature 0.8
+```
 
-- `cmd/orchestrator/` - Main application entry point
-- `internal/` - Private application code
-  - `agent/` - AI client and caching
-  - `config/` - Configuration management
-  - `orchestrator/` - Phase orchestration
-  - `phases/` - Individual phase implementations  
-  - `storage/` - File system abstraction
-- `scripts/` - Installation and utility scripts
-- `prompts/` - AI prompt templates
+## ⚙️ Configuration
 
-### Contributing
+The Orchestrator follows XDG Base Directory standards:
+
+- **Config**: `~/.config/orchestrator/config.yaml`
+- **Data**: `~/.local/share/orchestrator/`
+- **Plugins**: `~/.local/share/orchestrator/plugins/`
+
+### Example Configuration
+```yaml
+ai:
+  model: gpt-4
+  temperature: 0.7
+  max_tokens: 8000
+
+limits:
+  max_concurrent_requests: 3
+  rate_limit_rpm: 30
+
+plugins:
+  fiction:
+    max_chapter_length: 5000
+  code:
+    language_preference: go
+```
+
+## 🏛️ Advanced Features
+
+### Iterator Agent Architecture
+The Orchestrator employs revolutionary iterator agents that refine content until all quality criteria pass:
+
+```
+Initial Draft → Quality Check → Iterative Improvement → Final Output
+                     ↑                    ↓
+                     ←────── Retry ←──────
+```
+
+### "Be Like Water" Philosophy
+Adaptive orchestration that flows naturally with AI capabilities, adjusting strategies based on:
+- Content complexity
+- Quality requirements
+- Available resources
+- Real-time feedback
+
+## 🤝 Contributing
+
+We welcome contributions! The Orchestrator grows stronger with every forge:
 
 1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass: `make test`
-5. Run linters: `make lint`
-6. Submit a pull request
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### Testing
-
+### Development Setup
 ```bash
-# Run all tests
+# Clone the repository
+git clone https://github.com/dotcommander/orc.git
+cd orc
+
+# Install dependencies
+go mod download
+
+# Run tests
 make test
 
-# Run tests with verbose output
-make test-verbose
-
-# Run benchmarks
-make bench
-
-# Run specific test
-go test -v ./internal/agent -run TestPromptCache
+# Build the binary
+make build
 ```
+
+## 📚 Documentation
+
+- [Architecture Overview](docs/architecture.md)
+- [Plugin Development Guide](docs/plugin-development.md)
+- [API Reference](docs/api.md)
+- [Configuration Guide](docs/configuration.md)
+
+## 🛡️ Security
+
+The Orchestrator implements enterprise-grade security:
+- **Capability-based permissions** for plugins
+- **Sandboxed execution** environments
+- **API key encryption** in configuration
+- **Resource limiting** to prevent abuse
+
+## 📊 Performance
+
+Optimized for quality over speed:
+- **Concurrent phase execution** where possible
+- **Intelligent caching** of AI responses
+- **Circuit breakers** prevent cascade failures
+- **30+ requests/minute** sustained throughput
+
+## 🗺️ Roadmap
+
+- [ ] External plugin support (.so files)
+- [ ] Web UI for orchestration monitoring
+- [ ] Distributed execution across multiple machines
+- [ ] Additional content domains (music, video scripts)
+- [ ] Fine-tuned models for specific genres
+
+## 📜 License
+
+The Orchestrator is released under the MIT License. See [LICENSE](LICENSE) for details.
+
+## 🙏 Acknowledgments
+
+- Built with love using Go and OpenAI's GPT models
+- Inspired by the craftsmanship of Middle-earth's greatest smiths
+- Special thanks to all contributors who help forge this tool
+
+---
+
+<div align="center">
+  <p><strong>⚡ Forge Content Like Never Before ⚡</strong></p>
+  <p><em>The Orchestrator - Where AI Agents Unite to Create</em></p>
+</div>
